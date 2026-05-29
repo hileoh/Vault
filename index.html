@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leo's Knowledge Vault</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #111821;
+      --panel-2: #0f141b;
+      --text: #e8eef7;
+      --muted: #9aa4b2;
+      --border: rgba(255, 255, 255, 0.10);
+      --green: #6aa84f;
+      --purple: #c13fd9;
+      --blue: #4b7bec;
+      --gold: #b08a00;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(75, 123, 236, 0.15), transparent 32rem),
+        var(--bg);
+      color: var(--text);
+    }
+
+    .container {
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 48px 0 64px;
+    }
+
+    header {
+      margin-bottom: 32px;
+    }
+
+    .eyebrow {
+      color: var(--muted);
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(32px, 6vw, 56px);
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+      margin-top: 14px;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 24px 0 34px;
+    }
+
+    .search {
+      flex: 1 1 280px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .search::placeholder {
+      color: #7e8794;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      min-height: 220px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .stripe {
+      height: 72px;
+      background: var(--accent);
+    }
+
+    .content {
+      padding: 24px;
+    }
+
+    .course-code {
+      color: var(--muted);
+      font-size: 15px;
+      letter-spacing: 0.03em;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 26px;
+      line-height: 1.2;
+      color: var(--accent);
+    }
+
+    .desc {
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0 0 22px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 650;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .btn.primary {
+      border-color: transparent;
+      background: var(--accent);
+      color: #081018;
+    }
+
+    footer {
+      color: var(--muted);
+      margin-top: 36px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 760px) {
+      .container {
+        width: min(100% - 24px, 1100px);
+        padding-top: 32px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        min-height: 205px;
+      }
+
+      .stripe {
+        height: 58px;
+      }
+
+      .content {
+        padding: 20px;
+      }
+
+      h2 {
+        font-size: 23px;
+      }
+    }
+  </style>
+<script type="text/javascript" nonce="24ff05c57173476fa79d47a2ddd" src="//local.adguard.org?ts=1780058060169&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_0000000028bc71f8a5be2cf53c25be23%26fn%3Dindex%25284%2529.html%26cd%3Dattachment%26ts%3D494461%26p%3Dfs%26cid%3D1%26sig%3D36d270c2ccce09df367be1f54cdba539903449ed18e013a1f8fe87e97af31ac6%26v%3D0&amp;app=com.apple.Safari&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1"></script></head>
+<body>
+  <main class="container">
+    <header>
+      <div class="eyebrow">Personal Study Hub</div>
+      <h1>Leo's Knowledge Vault</h1>
+      <p class="subtitle">
+        A personal knowledge base for course notes and mind maps. 点击下面的课程卡片，可以进入对应课程的思维导图页面。
+      </p>
+    </header>
+
+    <div class="toolbar">
+      <input class="search" id="searchInput" type="search" placeholder="Search course name or code..." />
+    </div>
+
+    <section class="grid" id="courseGrid">
+      <article class="card" style="--accent: var(--green);" data-keywords="accounting systems analytics acct2000 2620_acct_2000_2">
+        <div class="stripe"></div>
+        <div class="content">
+          <div class="course-code">2620_ACCT_2000_2</div>
+          <h2>Accounting Systems and Analytics</h2>
+          <p class="desc">Power BI, analytics, information systems, database concepts and digital reporting.</p>
+          <div class="actions">
+            <a class="btn primary" href="maps/course/acct2000/index.html">Open Mind Maps</a>
+            <a class="btn" href="https://leohh.notion.site/Accounting-Systems-and-Analytics-31685d4ae508801289f2f7edc9f2b349?source=copy_link" target="_blank" rel="noopener noreferrer">Notion Notes</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" style="--accent: var(--purple);" data-keywords="business law busi1001 2620_busi_1001_c1">
+        <div class="stripe"></div>
+        <div class="content">
+          <div class="course-code">2620_BUSI_1001_C1</div>
+          <h2>Business Law</h2>
+          <p class="desc">Contract law, cases, legislation, IRAC structure and legal problem-solving notes.</p>
+          <div class="actions">
+            <a class="btn primary" href="maps/course/busi1001/index.html">Open Mind Maps</a>
+            <a class="btn" href="https://leohh.notion.site/Business-Law-31185d4ae5088098b26ddadb86865f3c?source=copy_link" target="_blank" rel="noopener noreferrer">Notion Notes</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" style="--accent: var(--blue);" data-keywords="management accounting acct2002 2620_acct_2002_2">
+        <div class="stripe"></div>
+        <div class="content">
+          <div class="course-code">2620_ACCT_2002_2</div>
+          <h2>Management Accounting</h2>
+          <p class="desc">Job costing, standard costing, budgeting, variance analysis and decision-making.</p>
+          <div class="actions">
+            <a class="btn primary" href="maps/course/acct2002/index.html">Open Mind Maps</a>
+            <a class="btn" href="https://leohh.notion.site/Management-Accounting-31385d4ae50880b0bcedea2712e23e6c?source=copy_link" target="_blank" rel="noopener noreferrer">Notion Notes</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" style="--accent: var(--gold);" data-keywords="management organisations leadership busi1002 2620_busi_1002_1">
+        <div class="stripe"></div>
+        <div class="content">
+          <div class="course-code">2620_BUSI_1002_1</div>
+          <h2>Management, Organisations and Leadership</h2>
+          <p class="desc">Management theories, organisational behaviour, leadership, motivation and teamwork.</p>
+          <div class="actions">
+            <a class="btn primary" href="maps/course/busi1002/index.html">Open Mind Maps</a>
+            <a class="btn" href="https://leohh.notion.site/Management-Organisations-and-Leadership-31685d4ae508807a8a5af2d03a8fa600?source=copy_link" target="_blank" rel="noopener noreferrer">Notion Notes</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <footer>
+      Suggested GitHub Pages structure: index.html + maps/course/acct2000/ + maps/course/busi1001/ + maps/course/acct2002/ + maps/course/busi1002/.
+    </footer>
+  </main>
+
+  <script>
+    const input = document.getElementById("searchInput");
+    const cards = [...document.querySelectorAll(".card")];
+
+    input.addEventListener("input", () => {
+      const q = input.value.trim().toLowerCase();
+
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase() + " " + card.dataset.keywords.toLowerCase();
+        card.style.display = text.includes(q) ? "" : "none";
+      });
+    });
+  </script>
+</body>
+</html>

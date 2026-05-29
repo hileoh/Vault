@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Management, Organisations and Leadership 10 Topic Mind Map</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --ink: #162234;
+      --muted: #61718a;
+      --line: #b9c8dc;
+      --line-soft: #dbe5f1;
+      --navy: #132f68;
+      --navy-2: #204286;
+      --accent: #2563eb;
+      --accent-text: #102a56;
+      --accent-soft: #eef5ff;
+      --accent-soft-2: #ffffff;
+      --accent-line: #bfcef1;
+      --accent-chip: #e7efff;
+      --selected-accent: #b4463d;
+      --card: #ffffff;
+      --shadow: 0 10px 22px rgba(30, 46, 78, 0.10);
+      --radius: 14px;
+      --tree-gap: 17px;
+      --branch-indent: clamp(22px, 3.4vw, 48px);
+      --branch-pad: clamp(18px, 2.4vw, 34px);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      min-height: 100%;
+      overflow-x: hidden;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--bg);
+    }
+
+    button, input {
+      font: inherit;
+      letter-spacing: 0;
+    }
+
+    .page {
+      width: min(100%, 1420px);
+      margin: 0 auto;
+      padding: 14px clamp(14px, 2.6vw, 42px) 64px;
+    }
+
+    .root-card {
+      position: sticky;
+      z-index: 10;
+      top: 10px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      min-width: 0;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 18px;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, #10275f 0%, var(--navy) 52%, var(--navy-2) 100%);
+      color: #ffffff;
+      box-shadow: 0 14px 32px rgba(19, 47, 104, 0.20);
+    }
+
+    .root-main {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      min-width: 0;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .root-title {
+      min-width: 0;
+      margin: 0;
+      overflow-wrap: anywhere;
+      text-wrap: balance;
+      font-size: clamp(21px, 2.5vw, 34px);
+      font-weight: 840;
+      line-height: 1.18;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 8px;
+    }
+
+    .tool-button {
+      min-height: 34px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 9px;
+      padding: 7px 11px;
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 760;
+      cursor: pointer;
+    }
+
+    .tool-button:hover,
+    .tool-button:focus-visible {
+      background: rgba(255, 255, 255, 0.22);
+      outline: none;
+    }
+
+    .tree {
+      position: relative;
+      display: grid;
+      gap: var(--tree-gap);
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .children {
+      position: relative;
+      display: grid;
+      gap: var(--tree-gap);
+      margin: 14px 0 0 var(--branch-indent);
+      padding: 0 0 0 var(--branch-pad);
+      border-left: 3px solid var(--accent-line);
+      list-style: none;
+    }
+
+    .tree-item {
+      position: relative;
+      min-width: 0;
+    }
+
+    .children > .tree-item::before {
+      content: "";
+      position: absolute;
+      left: calc(-1 * var(--branch-pad));
+      top: 25px;
+      width: var(--branch-pad);
+      border-top: 3px solid var(--accent-line);
+    }
+
+    .node-card {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      width: fit-content;
+      max-width: 100%;
+      min-width: min(100%, 320px);
+      align-items: flex-start;
+      gap: 11px;
+      border: 1px solid var(--line-soft);
+      border-left: 5px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 13px 18px;
+      background: linear-gradient(180deg, var(--card) 0%, #fbfdff 100%);
+      color: var(--ink);
+      box-shadow: var(--shadow);
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease, background 150ms ease;
+    }
+
+    .node-card:hover {
+      border-color: var(--accent-line);
+      box-shadow: 0 12px 25px rgba(30, 46, 78, 0.14);
+      transform: translateY(-1px);
+    }
+
+    .node-card:focus-visible {
+      outline: 3px solid rgba(29, 91, 191, 0.30);
+      outline-offset: 3px;
+    }
+
+    .node-card.has-children {
+      min-width: min(100%, 460px);
+    }
+
+    .depth-1 > .node-card,
+    .depth-2 > .node-card.topic-card {
+      border-color: var(--accent-line);
+      border-left-color: var(--accent);
+      background: linear-gradient(135deg, var(--accent-soft) 0%, var(--accent-soft-2) 100%);
+      color: var(--accent-text);
+    }
+
+    .tree-item.selected > .node-card {
+      border-color: var(--selected-accent);
+      box-shadow: 0 0 0 2px rgba(180, 70, 61, 0.16), var(--shadow);
+    }
+
+    .toggle-chip {
+      display: grid;
+      flex: 0 0 auto;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      border: 1px solid var(--accent-line);
+      border-radius: 8px;
+      background: #ffffff;
+      color: var(--accent-text);
+      font-size: 19px;
+      font-weight: 860;
+      line-height: 1;
+    }
+
+    .root-card .toggle-chip {
+      background: #ffffff;
+      color: var(--navy);
+    }
+
+    .count-chip {
+      display: grid;
+      flex: 0 0 auto;
+      width: 31px;
+      height: 31px;
+      place-items: center;
+      align-self: center;
+      border: 1px solid var(--accent-line);
+      border-radius: 999px;
+      background: var(--accent-chip);
+      color: var(--accent-text);
+      font-size: 14px;
+      font-weight: 860;
+      line-height: 1;
+    }
+
+    .root-card .count-chip {
+      border-color: rgba(255, 255, 255, 0.52);
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+    }
+
+    .node-content {
+      display: grid;
+      min-width: 0;
+      gap: 5px;
+    }
+
+    .node-title {
+      min-width: 0;
+      overflow-wrap: anywhere;
+      font-size: clamp(15px, 1.2vw, 20px);
+      font-weight: 790;
+      line-height: 1.24;
+    }
+
+    .depth-1 > .node-card .node-title,
+    .depth-2 > .node-card.topic-card .node-title {
+      font-size: clamp(17px, 1.45vw, 23px);
+      font-weight: 830;
+    }
+
+    .node-meta {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .node-note {
+      margin-top: 6px;
+      border-top: 1px solid var(--accent-line);
+      padding-top: 8px;
+      color: #425169;
+      font-size: clamp(15px, 1.05vw, 17px);
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .note-key {
+      border-radius: 5px;
+      padding: 0 0.18em;
+      background: var(--accent-chip);
+      color: var(--accent-text);
+      font-weight: 840;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+
+    .node-card.leaf-card {
+      grid-template-columns: minmax(0, 1fr);
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+
+    .node-card.leaf-card.has-note {
+      width: min(100%, 880px);
+      max-width: 880px;
+    }
+
+    .depth-3 > .node-card.leaf-card.has-note,
+    .depth-4 > .node-card.leaf-card.has-note,
+    .depth-5 > .node-card.leaf-card.has-note {
+      width: min(100%, 820px);
+      max-width: 820px;
+    }
+
+    .node-card.leaf-card .node-title {
+      font-size: clamp(16px, 1.18vw, 20px);
+      line-height: 1.28;
+    }
+
+    .tree.compact-notes .node-note {
+      display: none;
+    }
+
+    .empty {
+      display: none;
+      margin: 24px 0;
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius);
+      padding: 18px;
+      background: #ffffff;
+      color: var(--muted);
+      box-shadow: var(--shadow);
+    }
+
+    .empty.visible { display: block; }
+
+    @media (max-width: 760px) {
+      :root {
+        --tree-gap: 13px;
+        --branch-indent: 18px;
+        --branch-pad: 16px;
+      }
+
+      .page {
+        padding: 10px 10px 48px;
+      }
+
+      .root-card {
+        position: static;
+        grid-template-columns: 1fr;
+        padding: 14px;
+      }
+
+      .toolbar {
+        justify-content: flex-start;
+      }
+
+      .node-card,
+      .node-card.has-children {
+        width: 100%;
+        min-width: 0;
+        padding: 12px 13px;
+      }
+
+      .children {
+        margin-left: var(--branch-indent);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page" aria-label="MOL vertical mind map">
+    <section class="root-card" id="rootHeader">
+      <div class="root-main">
+        <span class="toggle-chip" id="rootToggleSign">-</span>
+        <h1 class="root-title">Management, Organisations and Leadership 10 Topic Mind Map</h1>
+        <span class="count-chip" id="rootCountLabel">12</span>
+      </div>
+      <div class="toolbar" aria-label="Mind map controls">
+        <button class="tool-button" id="topicView" type="button">Topics</button>
+        <button class="tool-button" id="expandAll" type="button">Expand All</button>
+        <button class="tool-button" id="collapseAll" type="button">Collapse All</button>
+        <button class="tool-button" id="toggleNotes" type="button" aria-pressed="true">Notes On</button>
+      </div>
+    </section>
+
+    <ul class="tree" id="tree"></ul>
+    <div class="empty" id="emptyState">No visible nodes</div>
+  </main>
+
+  <script id="mindmap-data" type="application/json">{"id": "n1", "label": "Management, Organisations and Leadership", "children": [{"id": "n2", "label": "Course logic / overall storyline（课程主线）", "children": [{"id": "n3", "label": "Management foundation（管理基础） → understand managers, organisations, functions, roles and skills", "children": []}, {"id": "n4", "label": "Environment and culture（环境与文化） → organisations must fit and respond to internal/external conditions", "children": []}, {"id": "n5", "label": "Core management cycle（管理循环） → planning → organising/structure → leading → controlling", "children": [], "note": "The management function that monitors results and corrects deviations from standards（控制）."}, {"id": "n6", "label": "People side（人的管理） → communication, leadership, motivation and teamwork shape behaviour", "children": [], "note": "Explains how information and meaning are exchanged so organising and leading can happen（沟通）."}, {"id": "n7", "label": "Decision making（决策） → managers choose actions under certainty, risk, uncertainty and ethical pressure", "children": [], "note": "The process of identifying a problem or opportunity and choosing an action（决策）."}, {"id": "n8", "label": "Exam/assignment lens（考试/作业视角）", "children": [{"id": "n9", "label": "Use concepts + terminology（概念术语）", "children": []}, {"id": "n10", "label": "Apply to organisational examples（结合组织例子）", "children": []}, {"id": "n11", "label": "Justify with clear reasoning（给出理由和评价）", "children": []}]}]}, {"id": "n12", "label": "Topic 01 - Understanding Management and Organisations（管理与组织）", "children": [{"id": "n13", "label": "What is management?（什么是管理）", "children": [{"id": "n14", "label": "Organisation and coordination of business activities to achieve defined objectives（协调活动以实现目标）", "children": []}, {"id": "n15", "label": "Management = getting things done efficiently and effectively through people（通过他人高效有效完成目标）", "children": []}, {"id": "n16", "label": "Efficiency（效率） = minimal resources / doing things right", "children": []}, {"id": "n17", "label": "Effectiveness（效果） = achieving stated goals / doing the right things", "children": []}, {"id": "n18", "label": "Organisational performance（组织绩效） = goal attainment using resources efficiently and effectively", "children": []}]}, {"id": "n19", "label": "Why study management?（为什么学管理）", "children": [{"id": "n20", "label": "Changing workplaces, ethical and trust issues, global uncertainty, technology（变化、伦理、全球不确定性、技术）", "children": []}, {"id": "n21", "label": "Understanding people’s behaviour is foundational（理解人的行为是基础）", "children": []}, {"id": "n22", "label": "Provides a toolkit of perspectives and approaches（提供管理工具箱）", "children": []}]}, {"id": "n23", "label": "Four management functions（四大管理职能）", "children": [{"id": "n24", "label": "Planning（计划）", "children": [{"id": "n25", "label": "Define future performance goals（定义未来目标）", "children": []}, {"id": "n26", "label": "Decide tasks and resource use（决定任务和资源配置）", "children": []}]}, {"id": "n27", "label": "Organising（组织）", "children": [{"id": "n28", "label": "Assign tasks（分配任务）", "children": [], "note": "Clarifies who is responsible for each piece of work so execution is coordinated（分配任务）."}, {"id": "n29", "label": "Group tasks into departments（部门化）", "children": []}, {"id": "n30", "label": "Allocate resources and responsibility（配置资源与责任）", "children": [], "note": "Places people, money, time, and tools where they can support objectives（资源配置）."}]}, {"id": "n31", "label": "Leading（领导）", "children": [{"id": "n32", "label": "Use influence to motivate employees toward goals（影响与激励）", "children": []}]}, {"id": "n33", "label": "Controlling（控制）", "children": [{"id": "n34", "label": "Monitor activities and keep organisation on track（监控进度）", "children": []}, {"id": "n35", "label": "Correct deviations when needed（纠偏）", "children": [], "note": "Adjusts actions or standards when performance moves away from goals（纠正偏差）."}]}]}, {"id": "n36", "label": "Managers and managerial work（管理者与工作内容）", "children": [{"id": "n37", "label": "Manager activities are fragmented, varied and fast-paced（任务碎片化且节奏快）", "children": [], "note": "Describes managerial work as brief, varied, and frequently interrupted（碎片化工作）."}, {"id": "n38", "label": "Need multitasking and time management（多任务与时间管理）", "children": [], "note": "Shows why managers must prioritise and switch attention across competing demands（多任务管理）."}, {"id": "n39", "label": "Levels of management（管理层级）", "children": [{"id": "n40", "label": "Top managers（高层） — strategy, whole organisation, external direction", "children": []}, {"id": "n41", "label": "Middle managers（中层） — translate strategy into tactical plans", "children": []}, {"id": "n42", "label": "Front-line managers（基层） — supervise daily work", "children": []}, {"id": "n43", "label": "Team leaders（团队负责人） — facilitate team activities", "children": []}]}, {"id": "n44", "label": "Mintzberg’s managerial roles（明茨伯格角色）", "children": [{"id": "n45", "label": "Interpersonal roles（人际角色）", "children": []}, {"id": "n46", "label": "Informational roles（信息角色）", "children": []}, {"id": "n47", "label": "Decisional roles（决策角色）", "children": []}]}, {"id": "n48", "label": "Management skills（管理技能）", "children": [{"id": "n49", "label": "Conceptual skills（概念技能） — analyse complex situations", "children": [], "note": "Supports seeing the organisation as a whole and understanding relationships among parts（概念技能）."}, {"id": "n50", "label": "Interpersonal skills（人际技能） — work with and motivate people", "children": []}, {"id": "n51", "label": "Technical skills（技术技能） — job-specific knowledge", "children": [], "note": "Supports competent use of specialised methods, tools, and task knowledge（技术技能）."}, {"id": "n52", "label": "Political skills（政治/影响力技能） — build support and resources", "children": []}]}]}, {"id": "n53", "label": "Historical perspectives（管理思想史）", "children": [{"id": "n54", "label": "Classical perspective（古典管理）", "children": [{"id": "n55", "label": "Scientific management / Taylor（科学管理） — efficiency, one best way, time-motion logic", "children": [], "note": "Represents scientific management: analyse work and design the most efficient method（泰勒科学管理）."}, {"id": "n56", "label": "Bureaucratic organisations / Weber（官僚制） — hierarchy, rules, formal authority", "children": [], "note": "Represents bureaucracy: formal authority, rules, hierarchy, and merit-based administration（韦伯官僚制）."}, {"id": "n57", "label": "Administrative principles / Fayol（行政管理） — whole organisation and management principles", "children": [], "note": "Connects core management ideas to planning, organising, leading, and controlling（管理原则）."}]}, {"id": "n58", "label": "Humanistic perspective（人本主义）", "children": [{"id": "n59", "label": "Human relations movement / Mayo（人际关系） — social needs and informal groups matter", "children": [], "note": "Uses official hierarchy and authorised channels to communicate goals or decisions（正式沟通）."}, {"id": "n60", "label": "Hawthorne studies（霍桑实验） — attention, morale and group norms affect productivity", "children": [], "note": "Shows that attention, social relations, and human factors shape productivity（霍桑研究）."}, {"id": "n61", "label": "Human resources perspective（人力资源观点） — people as capable resources, not just labour", "children": [], "note": "Represents the availability, skills, and expectations of potential employees（劳动力市场）."}]}, {"id": "n62", "label": "Contemporary approaches（当代观点）", "children": [{"id": "n63", "label": "Systems thinking（系统观） — organisation as open system", "children": [], "note": "Views the organisation as interdependent parts interacting with the wider environment（系统观）."}, {"id": "n64", "label": "Contingency view（权变观） — no one best way; fit depends on situation", "children": [], "note": "Emphasises that the best management action depends on the situation（权变观点）."}, {"id": "n65", "label": "Total Quality Management / TQM（全面质量管理） — organisation-wide customer quality", "children": [], "note": "Places customer expectations at the centre of quality improvement（顾客质量）."}, {"id": "n66", "label": "Technology-driven workplace（技术驱动工作场所） — agility, digital capability, innovation", "children": []}, {"id": "n67", "label": "Sustainability（可持续发展） — present needs without harming future needs", "children": []}]}]}]}, {"id": "n68", "label": "Topic 02 - Organisation and Management Environments（组织与管理环境）", "children": [{"id": "n69", "label": "External vs internal environment（外部与内部环境）", "children": [{"id": "n70", "label": "External environment（外部环境）", "children": [{"id": "n71", "label": "Open systems view（开放系统观）", "children": [], "note": "Views the organisation as interdependent parts interacting with the wider environment（系统观）."}, {"id": "n72", "label": "Elements outside the organisation that may affect it（组织边界外的影响因素）", "children": []}, {"id": "n73", "label": "Two layers: general environment + task environment（一般环境+任务环境）", "children": []}]}, {"id": "n74", "label": "Internal environment（内部环境）", "children": [{"id": "n75", "label": "Corporate/organisational culture（组织文化）", "children": []}, {"id": "n76", "label": "Structure（结构）", "children": []}, {"id": "n77", "label": "Technology（技术）", "children": []}, {"id": "n78", "label": "Physical facilities（物理设施）", "children": []}]}]}, {"id": "n79", "label": "General environment（一般环境：间接影响）", "children": [{"id": "n80", "label": "International dimension（国际维度） — foreign events, global opportunities, global mindset", "children": [], "note": "Captures international events and competitors that alter opportunities and risks（国际事件）."}, {"id": "n81", "label": "Technological dimension（技术维度） — scientific advances, AI, internet/e-business, telecommunications", "children": [], "note": "Covers scientific and digital changes that reshape products, processes, and work（技术环境）."}, {"id": "n82", "label": "Socio-cultural dimension（社会文化维度） — demographics, norms, values; multiculturalism, ageing population, Gen Y/Z", "children": [], "note": "Covers population, norms, and values that shape markets and labour expectations（社会文化）."}, {"id": "n83", "label": "Economic dimension（经济维度） — consumer spending, unemployment, interest rates", "children": [], "note": "Covers inflation, unemployment, income, and demand conditions affecting decisions（经济环境）."}, {"id": "n84", "label": "Legal-political dimension（法律政治维度） — regulations, legislation, pressure groups, lobby groups", "children": [], "note": "Covers laws, regulation, and political pressure that define acceptable action（法律政治）."}, {"id": "n85", "label": "Natural environment（自然环境） — resources, climate, sustainability pressure and regulations", "children": [], "note": "Links climate, resources, and sustainability to organisational choices（自然环境）."}]}, {"id": "n86", "label": "Task environment（任务环境：直接影响）", "children": [{"id": "n87", "label": "Customers（顾客） — consume products/services; success or failure depends on them", "children": [], "note": "Represents the people or organisations whose needs create demand（顾客）."}, {"id": "n88", "label": "Competitors（竞争者） — same industry/customer set; competitive edge challenge", "children": [], "note": "Represents rival organisations that affect strategy, pricing, and differentiation（竞争者）."}, {"id": "n89", "label": "Suppliers（供应商） — inputs and supply chain links", "children": [], "note": "Represents input providers whose reliability affects operations and quality（供应商）."}, {"id": "n90", "label": "Labour market（劳动力市场） — available talent; computer literacy, automation, facility shifts", "children": [], "note": "Represents the availability, skills, and expectations of potential employees（劳动力市场）."}, {"id": "n91", "label": "Stakeholders（利益相关者） — groups affected by organisational actions", "children": [], "note": "Considers obligations to groups affected by organisational decisions（利益相关者）."}]}, {"id": "n92", "label": "Organisational culture（组织文化）", "children": [{"id": "n93", "label": "Shared knowledge, beliefs, values, behaviours and ways of thinking（共享价值与行为方式）", "children": []}, {"id": "n94", "label": "Iceberg model（冰山模型）", "children": [{"id": "n95", "label": "Visible/surface level（显性层） — symbols, stories, heroes, rituals", "children": [], "note": "Visible cultural signs such as stories, ceremonies, dress, and artefacts（显性文化）."}, {"id": "n96", "label": "Invisible/deeper level（隐性层） — values, assumptions, beliefs", "children": [], "note": "Deep cultural beliefs that guide behaviour even when not openly stated（深层假设）."}]}, {"id": "n97", "label": "Seven dimensions（七个文化维度）", "children": [{"id": "n98", "label": "Innovation and risk-taking（创新与风险承担）", "children": [], "note": "Shows whether culture encourages experimentation and tolerance for uncertainty（创新冒险）."}, {"id": "n99", "label": "Attention to detail（关注细节）", "children": [], "note": "Shows whether precision, analysis, and accuracy are culturally valued（注重细节）."}, {"id": "n100", "label": "Outcome orientation（结果导向）", "children": [], "note": "Shows whether results matter more than process or effort alone（结果导向）."}, {"id": "n101", "label": "People orientation（以人为本）", "children": []}, {"id": "n102", "label": "Team orientation（团队导向）", "children": [], "note": "Shows whether collaboration and group outcomes are emphasised（团队导向）."}, {"id": "n103", "label": "Aggressiveness（进取/竞争性）", "children": [], "note": "Shows whether competitiveness and assertiveness are culturally encouraged（进取性）."}, {"id": "n104", "label": "Stability（稳定性）", "children": [], "note": "Shows whether predictability and continuity are valued over change（稳定性）."}]}, {"id": "n105", "label": "Four culture types（四种文化类型）", "children": [{"id": "n106", "label": "Adaptability culture（适应型） — fast response, flexibility", "children": [], "note": "Values flexibility, creativity, and fast response in changing environments（适应型文化）."}, {"id": "n107", "label": "Achievement culture（成就型） — results, competitiveness, initiative", "children": [], "note": "Values competition, initiative, and measurable results（成就型文化）."}, {"id": "n108", "label": "Involvement culture（参与型） — employee needs, cooperation, equality", "children": [], "note": "Values participation, cooperation, equality, and employee commitment（参与型文化）."}, {"id": "n109", "label": "Consistency culture（一致型） — order, rules, methodical processes", "children": [], "note": "Values rules, order, reliability, and internal stability（一致型文化）."}]}, {"id": "n110", "label": "Culture–strategy–environment fit（文化-战略-环境匹配）", "children": []}]}, {"id": "n111", "label": "Organisation–environment relationship（组织与环境关系）", "children": [{"id": "n112", "label": "Environmental uncertainty（环境不确定性） — managers lack complete information", "children": []}, {"id": "n113", "label": "Adapt to environment（适应环境）", "children": [{"id": "n114", "label": "Respond to uncertainty（回应不确定性）", "children": []}, {"id": "n115", "label": "Adjust structure and strategy（调整结构和战略）", "children": []}, {"id": "n116", "label": "Manage turbulence（应对动荡）", "children": []}, {"id": "n117", "label": "Boundary-spanning roles（边界跨越）", "children": []}]}, {"id": "n118", "label": "Influence the environment（影响环境）", "children": [{"id": "n119", "label": "Advertising and public relations（广告与公关）", "children": [], "note": "Uses public communication to shape perceptions and influence the task environment（广告公关）."}, {"id": "n120", "label": "Political activity / lobbying（游说与政治活动）", "children": [], "note": "Attempts to influence rules, policy, and regulatory outcomes（政治活动）."}, {"id": "n121", "label": "Strategic alliances（战略联盟）", "children": []}, {"id": "n122", "label": "Innovation and reputation management（创新与声誉管理）", "children": []}]}, {"id": "n123", "label": "High-performing organisations balance adaptation and influence（高绩效组织兼顾适应与影响）", "children": [], "note": "Shows that organisations must both respond to and try to shape their environments（适应与影响）."}]}, {"id": "n124", "label": "Globalisation and cultural leadership（全球化与文化领导）", "children": [{"id": "n125", "label": "Borderless world（无边界世界） — cross-national operations and regulatory differences", "children": []}, {"id": "n126", "label": "Managers need cultural intelligence（文化智商）, adaptability（适应力） and global mindset（全球思维）", "children": [], "note": "The capability to understand and adapt across cultures（文化智商）."}, {"id": "n127", "label": "MNC challenges（跨国公司挑战） — cultural flexibility, international coordination, local responsiveness", "children": []}, {"id": "n128", "label": "Cultural leadership（文化领导） — define and over-communicate values tied to mission", "children": [], "note": "Explains influence processes that move people toward organisational goals（领导）."}]}]}, {"id": "n129", "label": "Topic 03 - Effective Communication within Organisations（组织沟通）", "children": [{"id": "n130", "label": "Big picture（核心逻辑）", "children": [{"id": "n131", "label": "Communication = social process of exchanging information involving two or more people（信息交换的社会过程）", "children": [], "note": "Explains how information and meaning are exchanged so organising and leading can happen（沟通）."}, {"id": "n132", "label": "Underpins all four management functions（贯穿计划、组织、领导、控制）", "children": []}, {"id": "n133", "label": "Managers communicate to coordinate, motivate, monitor and change（协调、激励、监督、变革）", "children": []}]}, {"id": "n134", "label": "Communication process（沟通过程）", "children": [{"id": "n135", "label": "Sender（发送者） — puts information out", "children": []}, {"id": "n136", "label": "Message（信息） — content + nonverbal elements", "children": []}, {"id": "n137", "label": "Channel（渠道） — face-to-face, phone, video, email, text", "children": [], "note": "The richest channel because it carries immediate feedback, tone, and nonverbal cues（面对面沟通）."}, {"id": "n138", "label": "Receiver（接收者） — interprets meaning", "children": []}, {"id": "n139", "label": "Feedback（反馈） — closes the loop and checks understanding", "children": []}, {"id": "n140", "label": "Encoding/decoding（编码/解码） influenced by skills, attitudes, knowledge, social system and culture", "children": []}]}, {"id": "n141", "label": "Channel richness（渠道丰富度）", "children": [{"id": "n142", "label": "Richness = amount of information a channel can convey（能承载的信息量）", "children": []}, {"id": "n143", "label": "Face-to-face（面对面） — richest; best for ambiguous/emotional issues", "children": [], "note": "The richest channel because it carries immediate feedback, tone, and nonverbal cues（面对面沟通）."}, {"id": "n144", "label": "Phone/video（电话/视频） — medium richness", "children": []}, {"id": "n145", "label": "Email/text（邮件/文字） — lower richness; good for record and routine information", "children": [], "note": "A lean channel useful for clear records but weaker for ambiguity or emotion（邮件文字沟通）."}]}, {"id": "n146", "label": "Formal and informal communication（正式与非正式沟通）", "children": [{"id": "n147", "label": "Formal channels（正式渠道） — hierarchy, reports, policies, meetings; control and coordination", "children": [], "note": "Uses official hierarchy and authorised channels to communicate goals or decisions（正式沟通）."}, {"id": "n148", "label": "Informal channels（非正式渠道） — grapevine, networks, culture; norms, trust and influence", "children": [], "note": "Uses official hierarchy and authorised channels to communicate goals or decisions（正式沟通）."}, {"id": "n149", "label": "Informal communication is not always negative（非正式沟通不一定是坏事）", "children": [], "note": "Explains how information and meaning are exchanged so organising and leading can happen（沟通）."}]}, {"id": "n150", "label": "Nonverbal communication（非语言沟通）", "children": [{"id": "n151", "label": "Tone of voice（语气）", "children": [], "note": "A nonverbal cue that signals emotion, urgency, confidence, or doubt（语调）."}, {"id": "n152", "label": "Facial expressions（面部表情）", "children": [], "note": "A nonverbal cue that helps reveal emotional intent and reaction（表情）."}, {"id": "n153", "label": "Eye contact（眼神交流）", "children": [], "note": "A nonverbal cue affecting attention, trust, confidence, and respect（眼神交流）."}, {"id": "n154", "label": "Gestures and posture（手势与姿态）", "children": [], "note": "Body movement and posture that add meaning beyond words（手势姿态）."}, {"id": "n155", "label": "Managers should become aware of their own nonverbal signals（注意自身信号）", "children": []}]}, {"id": "n156", "label": "Barriers to effective communication（沟通障碍）", "children": [{"id": "n157", "label": "Language differences（语言差异）", "children": []}, {"id": "n158", "label": "Emotional filters（情绪过滤）", "children": []}, {"id": "n159", "label": "Distraction / lack of attention（分心/注意力不足）", "children": []}, {"id": "n160", "label": "Status differences（地位差异）", "children": []}, {"id": "n161", "label": "Cultural misunderstandings（文化误解）", "children": [], "note": "A system that provides information managers use for monitoring and decisions（管理信息系统）."}, {"id": "n162", "label": "Mental/perceptual barriers（认知和感知偏差）", "children": []}]}, {"id": "n163", "label": "Effective workplace communication skills（有效职场沟通技能）", "children": [{"id": "n164", "label": "Active listening（积极倾听）", "children": [{"id": "n165", "label": "Receiving（接收）", "children": [], "note": "The first listening step: physically or digitally taking in the message（接收信息）."}, {"id": "n166", "label": "Attending（专注）", "children": [], "note": "Focusing attention on the speaker or message instead of distractions（专注倾听）."}, {"id": "n167", "label": "Perceiving/interpreting（理解与解释）", "children": []}, {"id": "n168", "label": "Responding（回应）", "children": [], "note": "Showing understanding or asking questions so communication can continue（回应）."}]}, {"id": "n169", "label": "Clear and concise messaging（清晰简洁）", "children": []}, {"id": "n170", "label": "Cross-cultural awareness（跨文化意识）", "children": [], "note": "Applies management practices across different national and cultural settings（跨文化管理）."}, {"id": "n171", "label": "Feedback: giving and receiving（给予与接受反馈）", "children": []}, {"id": "n172", "label": "Emotional regulation（情绪调节）", "children": []}, {"id": "n173", "label": "Tailor the message（调整信息）", "children": [{"id": "n174", "label": "Audience awareness（受众意识）", "children": [], "note": "Adapts wording, detail, and channel to what the audience needs（受众意识）."}, {"id": "n175", "label": "Channel selection（渠道选择）", "children": []}, {"id": "n176", "label": "Tone and timing（语气与时机）", "children": []}]}]}, {"id": "n177", "label": "Communication styles and culture（沟通风格与文化）", "children": [{"id": "n178", "label": "Purposes: tell, sell, consult, join（告知、说服、咨询、共同参与）", "children": []}, {"id": "n179", "label": "People-oriented style（人本导向） vs problem-oriented style（问题导向）", "children": [], "note": "A communication style that gives priority to relationships, support, and feelings（人本导向）."}, {"id": "n180", "label": "High-context cultures（高语境） — meaning relies on context and relationships", "children": []}, {"id": "n181", "label": "Low-context cultures（低语境） — meaning relies on explicit words and directness", "children": []}, {"id": "n182", "label": "Cross-cultural tips（跨文化技巧） — be clear, use understandable language, check meaning", "children": [], "note": "Applies management practices across different national and cultural settings（跨文化管理）."}]}, {"id": "n183", "label": "Communication and conflict resolution（沟通与冲突解决）", "children": [{"id": "n184", "label": "Communication can escalate conflict（升级冲突）", "children": [], "note": "Explains how information and meaning are exchanged so organising and leading can happen（沟通）."}, {"id": "n185", "label": "Communication can clarify misunderstandings（澄清误解）", "children": [], "note": "Explains how information and meaning are exchanged so organising and leading can happen（沟通）."}, {"id": "n186", "label": "Communication can enable collaboration（促进合作）", "children": [], "note": "Explains how information and meaning are exchanged so organising and leading can happen（沟通）."}, {"id": "n187", "label": "Conflict management styles（冲突管理风格）", "children": [{"id": "n188", "label": "Avoiding（回避）", "children": [], "note": "A low-involvement conflict style that postpones or sidesteps the issue（回避风格）."}, {"id": "n189", "label": "Competing（竞争）", "children": [], "note": "A high-assertiveness conflict style used when speed, authority, or firm action matters（竞争风格）."}, {"id": "n190", "label": "Accommodating（迁就）", "children": [], "note": "A cooperative conflict style that yields to preserve relationships or support others（迁就风格）."}, {"id": "n191", "label": "Compromising（妥协）", "children": [], "note": "A conflict style where each side gives up something to reach a workable middle ground（妥协风格）."}, {"id": "n192", "label": "Collaborating / win–win（合作/双赢）", "children": []}]}]}]}, {"id": "n193", "label": "Topic 04 - Planning（计划）", "children": [{"id": "n194", "label": "Planning as foundation（计划是管理基础）", "children": [{"id": "n195", "label": "Most fundamental management function（最基础职能）", "children": []}, {"id": "n196", "label": "Other functions stem from planning（其他职能从计划开始）", "children": []}, {"id": "n197", "label": "Planning = identify goals + decide tasks/resources（确定目标与资源任务）", "children": []}, {"id": "n198", "label": "Goal（目标） = desired future state", "children": [], "note": "Defines a goal as a future outcome the organisation wants to reach（期望状态）."}, {"id": "n199", "label": "Plan（计划） = blueprint of resources, schedules and actions", "children": [], "note": "Defines a plan as the route for achieving a goal through actions and resources（计划蓝图）."}]}, {"id": "n200", "label": "Hierarchy of goals and plans（目标与计划层级）", "children": [{"id": "n201", "label": "Mission statement（使命） — legitimises organisation to stakeholders", "children": [], "note": "Considers obligations to groups affected by organisational decisions（利益相关者）."}, {"id": "n202", "label": "Strategic goals/plans（战略目标/计划） — organisation-wide, long-term, senior management", "children": []}, {"id": "n203", "label": "Tactical goals/plans（战术目标/计划） — divisions/functions, middle management", "children": []}, {"id": "n204", "label": "Operational goals/plans（运营目标/计划） — departments/individuals, lower management", "children": [], "note": "Uses systematic analysis to choose the option that best meets objectives（理性选择）."}, {"id": "n205", "label": "Means–ends chain（手段-目的链） — lower-level achievements support higher-level goals", "children": [], "note": "A learned need to accomplish challenging goals and receive performance feedback（成就需求）."}]}, {"id": "n206", "label": "Effective goals（有效目标）", "children": [{"id": "n207", "label": "Specific and measurable（具体且可衡量）", "children": []}, {"id": "n208", "label": "Defined time period（明确时间）", "children": []}, {"id": "n209", "label": "Cover key result areas（覆盖关键结果领域）", "children": []}, {"id": "n210", "label": "Challenging but realistic（有挑战但现实）", "children": []}, {"id": "n211", "label": "Linked to rewards（与奖励挂钩）", "children": []}, {"id": "n212", "label": "Aligned with mission and mutually supportive（与使命一致并相互支持）", "children": [], "note": "A system that provides information managers use for monitoring and decisions（管理信息系统）."}]}, {"id": "n213", "label": "Planning process（计划过程）", "children": [{"id": "n214", "label": "1. Develop the plan（制定计划） — determine mission, vision and set goals", "children": [], "note": "A system that provides information managers use for monitoring and decisions（管理信息系统）."}, {"id": "n215", "label": "2. Translate the plan（转化计划） — define tactical plans and strategic objectives", "children": []}, {"id": "n216", "label": "3. Plan operations（运营计划） — define goals, select measures and targets, set action details", "children": [], "note": "Sets the desired future state that guides tasks, resources, and evaluation（设定目标）."}, {"id": "n217", "label": "4. Execute the plan（执行计划） — use MBO, performance dashboards, single-use plans and decentralised responsibility", "children": [], "note": "Keeps major decisions near the top of the hierarchy（集权）."}, {"id": "n218", "label": "5. Monitor and learn（监控与学习） — review planning and operational outcomes", "children": [], "note": "Uses systematic analysis to choose the option that best meets objectives（理性选择）."}]}, {"id": "n219", "label": "Strategy map（战略地图）", "children": [{"id": "n220", "label": "Shows cause-effect relationships among goals and plans（展示因果关系）", "children": []}, {"id": "n221", "label": "Learning and growth → internal processes → customer service → financial performance → mission（学习成长到使命）", "children": [], "note": "A system that provides information managers use for monitoring and decisions（管理信息系统）."}]}, {"id": "n222", "label": "MBO — Management by Objectives（目标管理）", "children": [{"id": "n223", "label": "Set goals（设定目标）", "children": []}, {"id": "n224", "label": "Develop action plans（制定行动计划）", "children": []}, {"id": "n225", "label": "Review progress（检查进展）", "children": []}, {"id": "n226", "label": "Evaluate performance（评价绩效）", "children": []}, {"id": "n227", "label": "Limitations（局限） — can be rigid and may ignore environmental change", "children": []}]}, {"id": "n228", "label": "Strategic planning and uncertainty（战略计划与不确定性）", "children": [{"id": "n229", "label": "No plan survives first contact with uncertainty（计划无法完全消除不确定性）", "children": []}, {"id": "n230", "label": "Contingency planning（应急计划）", "children": [], "note": "Emphasises that the best management action depends on the situation（权变观点）."}, {"id": "n231", "label": "Scenario building（情景规划）", "children": []}, {"id": "n232", "label": "Crisis planning（危机计划）", "children": []}, {"id": "n233", "label": "Environmental scanning（环境扫描）", "children": []}, {"id": "n234", "label": "Benchmarking（标杆比较）", "children": []}]}, {"id": "n235", "label": "Strategic management tools（战略工具）", "children": [{"id": "n236", "label": "SWOT analysis（优势、劣势、机会、威胁）", "children": []}, {"id": "n237", "label": "Porter’s Five Forces（五力模型）", "children": []}, {"id": "n238", "label": "BCG Matrix（波士顿矩阵）", "children": [], "note": "Uses growth and market share to assess business units in a portfolio（BCG矩阵）."}, {"id": "n239", "label": "Corporate-level strategy（公司层战略）", "children": []}, {"id": "n240", "label": "Business-level strategy（业务层战略）", "children": []}, {"id": "n241", "label": "Planning drives innovation, change and competitive advantage（计划推动创新、变革和竞争优势）", "children": [], "note": "Creates a position that allows the organisation to outperform rivals（竞争优势）."}]}]}, {"id": "n242", "label": "Topic 05 - Leading（领导）", "children": [{"id": "n243", "label": "Nature of leadership（领导本质）", "children": [{"id": "n244", "label": "Leadership = ability to influence people toward organisational goals（影响他人实现组织目标）", "children": [], "note": "Explains influence processes that move people toward organisational goals（领导）."}, {"id": "n245", "label": "Three key aspects（关键要素）: people（人）, influence（影响）, goals（目标）", "children": []}, {"id": "n246", "label": "No one best leadership style（没有唯一最佳风格）", "children": [], "note": "Explains influence processes that move people toward organisational goals（领导）."}, {"id": "n247", "label": "Leadership is people-centred, dynamic and context-dependent（以人为中心、动态、依情境）", "children": [], "note": "Explains influence processes that move people toward organisational goals（领导）."}, {"id": "n248", "label": "Leadership ≠ management（领导不等于管理）", "children": [{"id": "n249", "label": "Management = structure, stability, control and efficient organising（结构与控制）", "children": [], "note": "Shows whether predictability and continuity are valued over change（稳定性）."}, {"id": "n250", "label": "Leadership = influence, direction, engagement and change（影响与方向）", "children": [], "note": "Explains influence processes that move people toward organisational goals（领导）."}]}]}, {"id": "n251", "label": "Contemporary leadership styles（当代领导风格）", "children": [{"id": "n252", "label": "Level 5 leadership（第五级领导）", "children": [{"id": "n253", "label": "Jim Collins origin（由Jim Collins提出）", "children": []}, {"id": "n254", "label": "Humility + fierce resolve（谦逊+强烈意志）", "children": []}, {"id": "n255", "label": "Focus on long-term organisational success（长期组织成功）", "children": []}]}, {"id": "n256", "label": "Servant leadership（服务型领导）", "children": [{"id": "n257", "label": "Transcends self-interest to serve others, organisation and society（超越私利服务他人）", "children": [], "note": "Frames leadership as service to followers, the organisation, and society（服务型领导）."}, {"id": "n258", "label": "Fulfils followers’ goals/needs and larger mission（满足下属需求与组织使命）", "children": [], "note": "Reminds that leadership outcomes depend on follower thinking, courage, and contribution（追随者）."}, {"id": "n259", "label": "Gives away power, ideas, information, recognition and credit（分享权力、信息与认可）", "children": [], "note": "A learned need to influence others or control resources and outcomes（权力需求）."}]}, {"id": "n260", "label": "Authentic leadership（真实型领导）", "children": [{"id": "n261", "label": "Self-aware and values-driven（自我认知与价值驱动）", "children": []}, {"id": "n262", "label": "Acts consistently with ethical values（符合伦理价值）", "children": [], "note": "Builds trust by making leader behaviour consistent with moral standards（伦理价值）."}, {"id": "n263", "label": "Transparent, open, passionate and disciplined（透明、开放、有热情、有纪律）", "children": []}]}, {"id": "n264", "label": "Interactive leadership（互动型领导）", "children": [{"id": "n265", "label": "Relational, inclusive and collaborative（关系型、包容、合作）", "children": []}, {"id": "n266", "label": "Shift: authority → influence; control → collaboration（从权威到影响，从控制到协作）", "children": []}]}]}, {"id": "n267", "label": "Leadership behaviour（领导行为）", "children": [{"id": "n268", "label": "Task-oriented behaviour（任务导向） — structure, deadlines, performance", "children": [], "note": "Leader behaviour focused on structure, goals, roles, and work completion（任务行为）."}, {"id": "n269", "label": "People-oriented behaviour（人际导向） — support, development, relationships", "children": [], "note": "A communication style that gives priority to relationships, support, and feelings（人本导向）."}, {"id": "n270", "label": "Ohio State: initiating structure + consideration（结构化+关怀）", "children": []}, {"id": "n271", "label": "Michigan: job-centred vs employee-centred（工作中心vs员工中心）", "children": [], "note": "Leadership that prioritises employee needs, development, and participation（员工中心）."}, {"id": "n272", "label": "Leadership Grid（领导方格） — concern for production + concern for people", "children": [], "note": "Explains influence processes that move people toward organisational goals（领导）."}, {"id": "n273", "label": "Effective leaders balance both（优秀领导平衡任务与人）", "children": []}]}, {"id": "n274", "label": "Contingency and adaptation（权变与适应）", "children": [{"id": "n275", "label": "Leadership effectiveness depends on the situation（有效性取决于情境）", "children": [], "note": "Explains influence processes that move people toward organisational goals（领导）."}, {"id": "n276", "label": "Situational Leadership / Hersey and Blanchard（情境领导）", "children": [{"id": "n277", "label": "Follower readiness（下属成熟度/准备度）", "children": [], "note": "Matches leadership style to followers' ability, confidence, and willingness（追随者成熟度）."}, {"id": "n278", "label": "Competence（能力）", "children": []}, {"id": "n279", "label": "Commitment（承诺/意愿）", "children": []}, {"id": "n280", "label": "Styles include directing, coaching, supporting and delegating（指挥、教练、支持、授权）", "children": []}]}, {"id": "n281", "label": "Substitutes for leadership（领导替代因素） — professional knowledge can make some leader behaviours unnecessary", "children": [], "note": "Assesses products or services that satisfy the same need in a different way（替代品威胁）."}, {"id": "n282", "label": "Neutralisers（中和因素） — variables that prevent a leadership style from working", "children": [], "note": "Explains influence processes that move people toward organisational goals（领导）."}]}, {"id": "n283", "label": "Transformational leadership and followership（变革型领导与追随）", "children": [{"id": "n284", "label": "Charismatic leadership（魅力型领导） — ignites followers’ energy and commitment", "children": [], "note": "Explains influence processes that move people toward organisational goals（领导）."}, {"id": "n285", "label": "Transformational leadership（变革型领导）", "children": [{"id": "n286", "label": "Inspires vision（激发愿景）", "children": []}, {"id": "n287", "label": "Encourages innovation（鼓励创新）", "children": []}, {"id": "n288", "label": "Builds trust（建立信任）", "children": []}, {"id": "n289", "label": "Drives change（推动变革）", "children": []}, {"id": "n290", "label": "Best during transformation, crisis and innovation periods（适合变革、危机、创新时期）", "children": []}]}, {"id": "n291", "label": "Transactional leadership（交易型领导） — clarifies roles/tasks and rewards performance", "children": [], "note": "Explains influence processes that move people toward organisational goals（领导）."}, {"id": "n292", "label": "Followership（追随者） — leadership is relational; engaged followers enhance effectiveness", "children": [], "note": "Explains influence processes that move people toward organisational goals（领导）."}]}, {"id": "n293", "label": "Power and influence（权力与影响）", "children": [{"id": "n294", "label": "Power = potential ability to influence others（影响他人的潜在能力）", "children": [], "note": "Defines leadership as influencing others to pursue shared organisational goals（影响力）."}, {"id": "n295", "label": "Influence = actual effect on attitudes, values, beliefs or behaviour（实际影响）", "children": []}, {"id": "n296", "label": "Position power（职位权力）", "children": [{"id": "n297", "label": "Legitimate power（法定权力）", "children": [], "note": "Power from a formal position and the accepted right to give direction（法定权力）."}, {"id": "n298", "label": "Reward power（奖励权力）", "children": [], "note": "Power based on controlling valued rewards such as pay, recognition, or opportunities（奖赏权力）."}, {"id": "n299", "label": "Coercive power（强制权力）", "children": [], "note": "Power based on the capacity to punish or remove valued outcomes（强制权力）."}]}, {"id": "n300", "label": "Personal power（个人权力）", "children": [{"id": "n301", "label": "Expert power（专家权力）", "children": [], "note": "Power based on specialised knowledge, skill, or credibility（专家权力）."}, {"id": "n302", "label": "Referent power（参照/人格魅力权力）", "children": [], "note": "Power based on admiration, trust, identification, or personal respect（参照权力）."}]}, {"id": "n303", "label": "Power must be used ethically（权力必须合乎伦理）", "children": [], "note": "A learned need to influence others or control resources and outcomes（权力需求）."}]}]}, {"id": "n304", "label": "Topic 06 - Organisational Structure（组织结构）", "children": [{"id": "n305", "label": "Definition and purpose（定义与作用）", "children": [{"id": "n306", "label": "Organising = arranging people effectively to work toward strategy（安排人员服务战略）", "children": []}, {"id": "n307", "label": "Organisational structure = formal framework of tasks, responsibilities, authority and coordination（任务、责任、权力的正式框架）", "children": [], "note": "Uses official hierarchy and authorised channels to communicate goals or decisions（正式沟通）."}, {"id": "n308", "label": "Good structure clarifies roles, coordinates departments, improves communication, efficiency and accountability（明确角色、协调、沟通、效率、问责）", "children": [], "note": "Explains how information and meaning are exchanged so organising and leading can happen（沟通）."}]}, {"id": "n309", "label": "Key elements of structure（结构关键要素）", "children": [{"id": "n310", "label": "Organisational chart（组织结构图）", "children": [{"id": "n311", "label": "Visual representation of formal structure（正式结构的可视化）", "children": [], "note": "Uses official hierarchy and authorised channels to communicate goals or decisions（正式沟通）."}, {"id": "n312", "label": "Departments/divisions, management levels and reporting relationships（部门、层级、汇报关系）", "children": [], "note": "Shows formal accountability and information flow between positions（汇报关系）."}, {"id": "n313", "label": "Chain of command（指挥链） and unity of command（统一指挥）", "children": []}]}, {"id": "n314", "label": "Division of labour / work specialisation（分工/工作专门化）", "children": [{"id": "n315", "label": "Work divided into separate tasks（工作分解）", "children": []}, {"id": "n316", "label": "Specialisation can improve efficiency but may reduce flexibility（提升效率但可能降低弹性）", "children": []}]}, {"id": "n317", "label": "Authority（权威）", "children": [{"id": "n318", "label": "Legitimate right to command and influence others（合法命令与影响权）", "children": [], "note": "Defines authority as the accepted formal right to make decisions and direct work（合法权威）."}, {"id": "n319", "label": "Line authority（直线权威） vs staff authority（参谋权威）", "children": []}, {"id": "n320", "label": "Delegation（授权） = transfer authority and responsibility", "children": [], "note": "Transfers authority and responsibility so work can be handled closer to action（授权委派）."}]}, {"id": "n321", "label": "Span of management/control（管理幅度）", "children": [{"id": "n322", "label": "Number of employees reporting to a manager（下属人数）", "children": []}, {"id": "n323", "label": "Narrow span → tall organisation（窄幅度→高耸结构）", "children": []}, {"id": "n324", "label": "Wide span → flat organisation（宽幅度→扁平结构）", "children": []}]}, {"id": "n325", "label": "Centralisation vs decentralisation（集权vs分权）", "children": [{"id": "n326", "label": "Centralised decisions at top（高层决策）", "children": [], "note": "Keeps major decisions near the top of the hierarchy（集权）."}, {"id": "n327", "label": "Decentralised decisions involve lower levels（低层参与决策）", "children": [], "note": "Keeps major decisions near the top of the hierarchy（集权）."}]}, {"id": "n328", "label": "Formalisation（正规化） — rules, procedures and standardisation", "children": [], "note": "Uses official hierarchy and authorised channels to communicate goals or decisions（正式沟通）."}]}, {"id": "n329", "label": "Basic approaches（基本结构方式）", "children": [{"id": "n330", "label": "Simple structure（简单结构）", "children": [{"id": "n331", "label": "Low departmentalisation, wide span, centralised authority（低部门化、宽幅度、集权）", "children": [], "note": "Keeps major decisions near the top of the hierarchy（集权）."}, {"id": "n332", "label": "Common in small businesses/startups（小企业/创业公司常见）", "children": []}, {"id": "n333", "label": "Fast and flexible but owner-dependent（快速灵活但依赖创始人）", "children": []}]}, {"id": "n334", "label": "Functional structure（职能结构）", "children": [{"id": "n335", "label": "Group employees by function: marketing, finance, HR, operations（按职能分组）", "children": []}, {"id": "n336", "label": "Advantages: specialisation, efficiency, clear career paths（专门化、效率）", "children": []}, {"id": "n337", "label": "Disadvantages: functional silos and poor cross-department coordination（部门壁垒）", "children": [], "note": "Groups jobs by specialised function to build expertise and efficiency（职能结构）."}]}, {"id": "n338", "label": "Divisional structure（事业部结构）", "children": [{"id": "n339", "label": "Semi-autonomous units by product, customer or geography（按产品/客户/地区划分）", "children": []}, {"id": "n340", "label": "Product-based（产品型）", "children": []}, {"id": "n341", "label": "Customer-based（客户型）", "children": []}, {"id": "n342", "label": "Geographic（地理型）", "children": []}, {"id": "n343", "label": "Advantage: focus and local responsiveness（聚焦与本地响应）", "children": []}, {"id": "n344", "label": "Disadvantage: duplicated functions and higher cost（职能重复与成本）", "children": []}]}, {"id": "n345", "label": "Matrix structure（矩阵结构）", "children": [{"id": "n346", "label": "Hybrid of functional and divisional structures（职能+事业部混合）", "children": [], "note": "Groups jobs by specialised function to build expertise and efficiency（职能结构）."}, {"id": "n347", "label": "Dual reporting: functional manager + project/product manager（双重汇报）", "children": [], "note": "Groups jobs by specialised function to build expertise and efficiency（职能结构）."}, {"id": "n348", "label": "Improves coordination for complex projects（促进复杂项目协调）", "children": []}, {"id": "n349", "label": "Challenges: dual authority conflict/confusion（双重权威冲突）", "children": []}]}]}, {"id": "n350", "label": "Contemporary approaches（当代结构方式）", "children": [{"id": "n351", "label": "Team-based structure（团队型结构）", "children": [{"id": "n352", "label": "Self-directed project teams（自主管理项目团队）", "children": []}, {"id": "n353", "label": "Decentralised authority and cross-functional collaboration（分权与跨职能协作）", "children": [], "note": "Keeps major decisions near the top of the hierarchy（集权）."}, {"id": "n354", "label": "Improves communication, speed and involvement（沟通、速度、参与）", "children": [], "note": "Explains how information and meaning are exchanged so organising and leading can happen（沟通）."}]}, {"id": "n355", "label": "Network structure（网络结构）", "children": [{"id": "n356", "label": "Small efficient core + outsourcing to partners（小核心+外包伙伴）", "children": []}, {"id": "n357", "label": "Coordinates suppliers, contractors and service providers（协调外部网络）", "children": [], "note": "Represents input providers whose reliability affects operations and quality（供应商）."}, {"id": "n358", "label": "Focus on core competence but dependence on partners（核心能力+伙伴依赖）", "children": []}]}, {"id": "n359", "label": "Virtual organisation（虚拟组织）", "children": [{"id": "n360", "label": "No single brick-and-mortar location（无单一实体地点）", "children": []}, {"id": "n361", "label": "Remote collaboration through digital technologies（数字化远程协作）", "children": []}, {"id": "n362", "label": "Flat structure and flexible staffing（扁平且灵活）", "children": []}]}]}, {"id": "n363", "label": "Mechanistic vs organic（机械式vs有机式）", "children": [{"id": "n364", "label": "Mechanistic（机械式）", "children": [{"id": "n365", "label": "Tall structure, narrow spans, formal rules, clear chain, centralised decisions（高耸、规则、集权）", "children": [], "note": "Uses official hierarchy and authorised channels to communicate goals or decisions（正式沟通）."}, {"id": "n366", "label": "Best in stable environments（适合稳定环境）", "children": []}]}, {"id": "n367", "label": "Organic（有机式）", "children": [{"id": "n368", "label": "Flat structure, wide spans, informal communication, few rules, decentralised decisions（扁平、分权、少规则）", "children": [], "note": "Explains how information and meaning are exchanged so organising and leading can happen（沟通）."}, {"id": "n369", "label": "Best in changing environments requiring innovation（适合变化和创新环境）", "children": []}]}]}, {"id": "n370", "label": "Structure fit and challenges（结构匹配与挑战）", "children": [{"id": "n371", "label": "Strategy–structure fit（战略-结构匹配） — structure should support strategy", "children": [], "note": "Ensures structure matches what the organisation is trying to achieve（支持战略）."}, {"id": "n372", "label": "Environment fit（环境匹配） — stable = more formal; dynamic = more flexible", "children": [], "note": "Uses official hierarchy and authorised channels to communicate goals or decisions（正式沟通）."}, {"id": "n373", "label": "Restructuring（重组） — changes to hierarchy, departments, geography or reporting relationships", "children": [], "note": "Shows formal accountability and information flow between positions（汇报关系）."}, {"id": "n374", "label": "Reasons for restructuring（重组原因）: performance, environment, growth, merger, downsizing", "children": [], "note": "Redesigns roles, units, or processes to improve fit, performance, or adaptability（组织重组）."}, {"id": "n375", "label": "Ethics and governance（伦理与治理） — clear reporting lines support accountability and compliance", "children": [], "note": "Shows how structure clarifies authority, communication, and coordination（汇报线）."}]}]}, {"id": "n376", "label": "Topic 07 - Controlling（控制）", "children": [{"id": "n377", "label": "Role of controlling（控制的角色）", "children": [{"id": "n378", "label": "Final function of management（最后一个管理职能）", "children": []}, {"id": "n379", "label": "Ensures goals are achieved（确保目标实现）", "children": []}, {"id": "n380", "label": "Monitors performance vs expectations（比较实际与预期）", "children": []}, {"id": "n381", "label": "Supports planning, organising and leading（支持计划、组织、领导）", "children": []}, {"id": "n382", "label": "Effective control keeps activities aligned with organisational goals（使活动与目标一致）", "children": []}]}, {"id": "n383", "label": "Why control matters（为什么重要）", "children": [{"id": "n384", "label": "Planning-control link（计划-控制联系）", "children": []}, {"id": "n385", "label": "Empowering employees（授权员工） — clear standards allow autonomy with accountability", "children": [], "note": "Benchmarks used to judge whether performance is acceptable（控制标准）."}, {"id": "n386", "label": "Protecting the workplace（保护工作场所） — prevent risk, poor performance and unethical behaviour", "children": []}]}, {"id": "n387", "label": "The control process — 4 steps（控制过程四步）", "children": [{"id": "n388", "label": "1. Establish objectives and standards（建立目标与标准）", "children": [{"id": "n389", "label": "Performance objectives represent key results（关键结果）", "children": []}, {"id": "n390", "label": "Output standards（产出标准） — quantity, quality, cost, time", "children": [], "note": "Benchmarks used to judge whether performance is acceptable（控制标准）."}, {"id": "n391", "label": "Input standards（投入标准） — work effort and resources", "children": [], "note": "Benchmarks used to judge whether performance is acceptable（控制标准）."}]}, {"id": "n392", "label": "2. Measure actual performance（衡量实际绩效）", "children": [{"id": "n393", "label": "Without measurement, effective control is impossible（没有衡量就没有控制）", "children": []}, {"id": "n394", "label": "Use tangible/quantifiable measures when possible（可量化指标）", "children": []}, {"id": "n395", "label": "Use subjective measures when quantification is difficult（主观评估）", "children": []}, {"id": "n396", "label": "Sources: personal observation, oral reports, statistical reports, written reports（观察、口头、统计、书面）", "children": []}]}, {"id": "n397", "label": "3. Compare performance with standards（比较实际与标准）", "children": [{"id": "n398", "label": "Identify gaps/deviations（识别差距）", "children": []}, {"id": "n399", "label": "Range of variation（可接受偏差范围）", "children": [], "note": "Defines acceptable deviation so managers do not overreact to minor differences（可接受偏差）."}, {"id": "n400", "label": "Action needed when performance falls outside acceptable limits（超过范围需行动）", "children": []}]}, {"id": "n401", "label": "4. Take managerial action（采取管理行动）", "children": [{"id": "n402", "label": "Do nothing（不采取行动）", "children": [], "note": "A control response used when performance variation is acceptable or standards remain valid（不采取行动）."}, {"id": "n403", "label": "Correct performance（纠正绩效）", "children": [], "note": "A control response that fixes actions, processes, or behaviour when results fall short（纠正绩效）."}, {"id": "n404", "label": "Revise standards（修订标准）", "children": [], "note": "A control response used when the standard itself is unrealistic or no longer suitable（修订标准）."}, {"id": "n405", "label": "Immediate corrective action（立即纠正） vs basic/root-cause corrective action（根本纠正）", "children": [], "note": "Changes behaviour, processes, or standards after a performance gap is found（纠正行动）."}, {"id": "n406", "label": "Management by exception（例外管理） — focus on substantial deviations", "children": []}, {"id": "n407", "label": "After-action review（事后复盘） — identify lessons learned", "children": []}]}]}, {"id": "n408", "label": "Timing of control（控制时点）", "children": [{"id": "n409", "label": "Feedforward control（前馈控制） — before activity; e.g., WHS training", "children": [], "note": "Controls inputs and preparation before activity begins（前馈控制）."}, {"id": "n410", "label": "Concurrent control（同期控制） — during activity; e.g., supervisor intervention", "children": [], "note": "Controls work while it is happening so problems can be corrected immediately（同期控制）."}, {"id": "n411", "label": "Feedback control（反馈控制） — after activity; e.g., performance appraisal", "children": [], "note": "Uses results after completion to learn and improve future performance（反馈控制）."}]}, {"id": "n412", "label": "What should managers control?（控制对象）", "children": [{"id": "n413", "label": "Information controls（信息控制）", "children": [{"id": "n414", "label": "Information as a tool to control activities（用于控制其他活动）", "children": []}, {"id": "n415", "label": "Information as an organisational area needing control（信息本身也需控制）", "children": []}]}, {"id": "n416", "label": "Financial controls（财务控制）", "children": [{"id": "n417", "label": "Cash availability（现金充足）", "children": [], "note": "Shows whether the organisation has enough liquid funds to meet obligations（现金可用性）."}, {"id": "n418", "label": "Debt levels（债务水平）", "children": [], "note": "Shows financial risk from borrowing and repayment obligations（债务水平）."}, {"id": "n419", "label": "Financial ratios（财务比率）", "children": [], "note": "Summarise financial health by comparing key accounting numbers（财务比率）."}]}, {"id": "n420", "label": "Operational controls（运营控制）", "children": [{"id": "n421", "label": "Balanced scorecard（平衡计分卡）", "children": [], "note": "Combines financial, customer, process, and learning indicators for broader control（平衡计分卡）."}, {"id": "n422", "label": "Financial, customer, internal process, learning/growth perspectives（财务、顾客、内部流程、学习成长）", "children": [], "note": "Tracks operational processes that create value（内部流程视角）."}]}, {"id": "n423", "label": "Employee performance feedback（员工绩效反馈）", "children": [{"id": "n424", "label": "Positive feedback is easier to receive（正反馈更易接受）", "children": []}, {"id": "n425", "label": "Negative feedback should be supported by hard data（负反馈需数据支持）", "children": []}]}]}, {"id": "n426", "label": "Control and ethics（控制与伦理）", "children": [{"id": "n427", "label": "Management control systems guide ethical behaviour（MCS引导伦理行为）", "children": [], "note": "Views the organisation as interdependent parts interacting with the wider environment（系统观）."}, {"id": "n428", "label": "Code of conduct / ethics policy（行为准则/伦理政策）", "children": [], "note": "Connects control and decisions to values, responsibility, and acceptable conduct（伦理）."}, {"id": "n429", "label": "Internal controls（内部控制）", "children": []}, {"id": "n430", "label": "Ethics = principles defining right and wrong conduct（判断对错的原则）", "children": [], "note": "Connects control and decisions to values, responsibility, and acceptable conduct（伦理）."}, {"id": "n431", "label": "Ethical perspectives（伦理视角）", "children": [{"id": "n432", "label": "Individualism view（个人主义）", "children": []}, {"id": "n433", "label": "Moral rights view（道德权利）", "children": []}, {"id": "n434", "label": "Justice view（公平正义）", "children": []}, {"id": "n435", "label": "Utilitarian view（功利主义）", "children": []}]}, {"id": "n436", "label": "Factors affecting ethical/unethical behaviour（影响因素）", "children": [{"id": "n437", "label": "Personal characteristics: moral identity, moral development, empathy, narcissism, ethical principles（个人特征）", "children": [], "note": "The degree to which being ethical is central to a person's self-concept（道德身份）."}, {"id": "n438", "label": "Issue characteristics: intensity and harm/good caused（议题强度）", "children": []}, {"id": "n439", "label": "Organisational characteristics: structure and culture（组织结构与文化）", "children": []}, {"id": "n440", "label": "Agency（能动性） — freedom to act ethically/unethically", "children": []}]}, {"id": "n441", "label": "How managers encourage ethics（如何促进伦理）", "children": [{"id": "n442", "label": "Hire employees with high ethical standards（招聘有伦理标准的人）", "children": [], "note": "Benchmarks used to judge whether performance is acceptable（控制标准）."}, {"id": "n443", "label": "Establish ethical culture（建立伦理文化）", "children": []}, {"id": "n444", "label": "Provide code of ethics and training（伦理守则和培训）", "children": [], "note": "Connects control and decisions to values, responsibility, and acceptable conduct（伦理）."}, {"id": "n445", "label": "Use decision steps for ethical dilemmas（用步骤处理伦理困境）", "children": []}]}]}]}, {"id": "n446", "label": "Topic 08 - Motivation（动机/激励）", "children": [{"id": "n447", "label": "What is motivation?（什么是动机）", "children": [{"id": "n448", "label": "Work motivation = conditions and processes that initiate, guide and regulate behaviour at work（启动、引导和调节工作行为）", "children": [], "note": "The forces that direct, energise, and sustain work behaviour toward goals（激励）."}, {"id": "n449", "label": "Can be internal or external（可来自内部或外部）", "children": []}, {"id": "n450", "label": "Three elements（三要素）", "children": [{"id": "n451", "label": "Direction（方向） — working toward a specific goal or vision", "children": []}, {"id": "n452", "label": "Persistence（坚持） — sticking with tasks over time and setbacks", "children": [], "note": "Continuing effort despite obstacles, delays, or setbacks（坚持）."}, {"id": "n453", "label": "Intensity（强度） — level of effort", "children": [], "note": "The energy a person invests in pursuing a goal（努力）."}]}, {"id": "n454", "label": "Motivation differs between individuals（个体差异）", "children": [], "note": "The forces that direct, energise, and sustain work behaviour toward goals（激励）."}]}, {"id": "n455", "label": "Intrinsic vs extrinsic motivation（内在vs外在动机）", "children": [{"id": "n456", "label": "Intrinsic motivation（内在动机） — enjoyment, accomplishment, internal goals", "children": [], "note": "The forces that direct, energise, and sustain work behaviour toward goals（激励）."}, {"id": "n457", "label": "Extrinsic motivation（外在动机） — salary, bonus, external rewards", "children": [], "note": "The forces that direct, energise, and sustain work behaviour toward goals（激励）."}, {"id": "n458", "label": "Managers should combine both carefully（管理者应结合两者）", "children": []}]}, {"id": "n459", "label": "Early theories of motivation（早期动机理论）", "children": [{"id": "n460", "label": "Maslow’s Hierarchy of Needs（马斯洛需求层次）", "children": [{"id": "n461", "label": "Physiological（生理）", "children": []}, {"id": "n462", "label": "Safety and security（安全）", "children": []}, {"id": "n463", "label": "Social/belonging（社交/归属）", "children": []}, {"id": "n464", "label": "Esteem（尊重）", "children": []}, {"id": "n465", "label": "Self-actualisation（自我实现）", "children": [], "note": "The need to realise potential through growth, creativity, and meaningful contribution（自我实现）."}, {"id": "n466", "label": "Strength: simple way to think about needs（简单易懂）", "children": []}, {"id": "n467", "label": "Limitation: needs may not follow the same order for everyone（顺序不一定适用于所有人）", "children": []}]}, {"id": "n468", "label": "McClelland’s Three Needs（麦克利兰三需求）", "children": [{"id": "n469", "label": "Need for achievement（成就需要）", "children": [], "note": "A learned need to accomplish challenging goals and receive performance feedback（成就需求）."}, {"id": "n470", "label": "Need for affiliation（归属/关系需要）", "children": [], "note": "A learned need for friendly relationships, belonging, and acceptance（归属需求）."}, {"id": "n471", "label": "Need for power（权力需要）", "children": [], "note": "A learned need to influence others or control resources and outcomes（权力需求）."}]}, {"id": "n472", "label": "McGregor’s Theory X and Theory Y（X理论与Y理论）", "children": [{"id": "n473", "label": "Theory X（X理论） — people dislike work and need control", "children": [], "note": "Assumes people dislike work and require control or pressure（X理论）."}, {"id": "n474", "label": "Theory Y（Y理论） — people can be self-directed and responsible", "children": [], "note": "Assumes people can be self-directed and seek responsibility under the right conditions（Y理论）."}, {"id": "n475", "label": "Manager assumptions influence motivation approach（管理者假设会影响激励方式）", "children": [], "note": "Deep cultural beliefs that guide behaviour even when not openly stated（深层假设）."}]}, {"id": "n476", "label": "Herzberg Two-Factor Theory（赫茨伯格双因素）", "children": [{"id": "n477", "label": "Hygiene factors（保健因素） — salary, benefits, safe conditions, policies, relationships", "children": [], "note": "Factors that prevent dissatisfaction but do not by themselves create strong motivation（保健因素）."}, {"id": "n478", "label": "Motivators（激励因素） — achievement, recognition, work itself, responsibility", "children": [], "note": "A learned need to accomplish challenging goals and receive performance feedback（成就需求）."}, {"id": "n479", "label": "Hygiene prevents dissatisfaction; motivators create satisfaction（保健防不满，激励促满意）", "children": [], "note": "Factors that prevent dissatisfaction but do not by themselves create strong motivation（保健因素）."}]}]}, {"id": "n480", "label": "Internal factors（内部影响因素）", "children": [{"id": "n481", "label": "Personality traits（人格特质）", "children": []}, {"id": "n482", "label": "Basic needs（基本需求）", "children": []}, {"id": "n483", "label": "Cultural attributes（文化属性）", "children": []}, {"id": "n484", "label": "Motives and orientations（动机倾向）", "children": []}]}, {"id": "n485", "label": "Contemporary/process theories（当代/过程理论）", "children": [{"id": "n486", "label": "Goal-setting theory（目标设定理论）", "children": [{"id": "n487", "label": "Goals inspire and direct behaviour（目标引导行为）", "children": []}, {"id": "n488", "label": "SMART goals: Specific, Measurable, Achievable, Realistic, Timely（SMART目标）", "children": []}, {"id": "n489", "label": "Clear targets reduce disengagement（清晰目标减少懈怠）", "children": []}]}, {"id": "n490", "label": "Job Characteristics Model（工作特征模型）", "children": [{"id": "n491", "label": "Core job characteristics（核心工作特征）", "children": [{"id": "n492", "label": "Skill variety（技能多样性）", "children": [], "note": "A job design characteristic where work uses multiple skills and abilities（技能多样性）."}, {"id": "n493", "label": "Task identity（任务完整性）", "children": [], "note": "A job design characteristic where employees complete a whole, identifiable piece of work（任务完整性）."}, {"id": "n494", "label": "Task significance（任务重要性）", "children": [], "note": "A job design characteristic showing the work has meaningful impact on others（任务重要性）."}, {"id": "n495", "label": "Autonomy（自主性）", "children": [], "note": "A job design characteristic giving employees discretion over methods, scheduling, and decisions（自主性）."}, {"id": "n496", "label": "Feedback（反馈）", "children": [], "note": "The receiver's response that shows whether meaning has been understood or needs repair（反馈）."}]}, {"id": "n497", "label": "Creates psychological states and positive outcomes（形成心理状态和积极结果）", "children": []}, {"id": "n498", "label": "Useful when jobs feel repetitive/boring（适用于重复无聊岗位）", "children": []}]}, {"id": "n499", "label": "Equity theory（公平理论）", "children": [{"id": "n500", "label": "People compare inputs and outputs（比较投入与回报）", "children": [], "note": "Evaluates actual performance against standards to identify gaps（比较差距）."}, {"id": "n501", "label": "Inputs: experience, education, knowledge, skills, time（投入）", "children": []}, {"id": "n502", "label": "Outputs: pay, recognition, benefits, promotion（回报）", "children": []}, {"id": "n503", "label": "Perceived unfairness reduces motivation（不公平感降低动机）", "children": [], "note": "The forces that direct, energise, and sustain work behaviour toward goals（激励）."}, {"id": "n504", "label": "Organisational justice（组织公平）: distributive, procedural, interpersonal/informational", "children": []}]}, {"id": "n505", "label": "Reinforcement theory（强化理论）", "children": [{"id": "n506", "label": "Reward desired behaviour（奖励期望行为）", "children": []}, {"id": "n507", "label": "Punishment/negative consequences can reduce undesirable behaviour（减少不良行为）", "children": []}, {"id": "n508", "label": "Use carefully to avoid fear-based culture（避免恐惧文化）", "children": []}]}, {"id": "n509", "label": "Expectancy theory（期望理论）", "children": [{"id": "n510", "label": "Effort → performance → reward logic（努力-绩效-奖励）", "children": [], "note": "The energy a person invests in pursuing a goal（努力）."}, {"id": "n511", "label": "Expectancy: Can I achieve the performance?（我能做到吗）", "children": [], "note": "Motivation depends on believing effort leads to performance, performance to outcomes, and outcomes have value（期望理论）."}, {"id": "n512", "label": "Instrumentality: Will performance lead to rewards?（绩效会带来回报吗）", "children": []}, {"id": "n513", "label": "Valence: Do I value the reward?（奖励有价值吗）", "children": []}, {"id": "n514", "label": "Useful when employees do not believe effort leads to rewards（适用于努力不一定有回报的情境）", "children": [], "note": "The energy a person invests in pursuing a goal（努力）."}]}]}, {"id": "n515", "label": "Applying motivation in management（管理应用）", "children": [{"id": "n516", "label": "No single approach works for everyone（没有万能激励方式）", "children": []}, {"id": "n517", "label": "Consider individual needs and personality differences（考虑需求与人格差异）", "children": []}, {"id": "n518", "label": "Consider perceptions of fairness（关注公平感）", "children": []}, {"id": "n519", "label": "Combine multiple theories（综合使用多种理论）", "children": []}, {"id": "n520", "label": "Example diagnosis（情境诊断）", "children": [{"id": "n521", "label": "Little recognition → Herzberg / equity theory（缺乏认可）", "children": [], "note": "Motivation theory based on perceived fairness of inputs and outcomes（公平理论）."}, {"id": "n522", "label": "Unclear targets → goal-setting theory（目标不清）", "children": []}, {"id": "n523", "label": "Repetitive job → job characteristics model（工作重复）", "children": [], "note": "Designs work so it creates meaning, responsibility, and knowledge of results（工作特征）."}, {"id": "n524", "label": "No reward link → expectancy theory（努力与奖励脱节）", "children": [], "note": "Motivation depends on believing effort leads to performance, performance to outcomes, and outcomes have value（期望理论）."}]}]}]}, {"id": "n525", "label": "Topic 09 - Teamwork, Individuals and Groups（团队、个体与群体）", "children": [{"id": "n526", "label": "What is a team?（什么是团队）", "children": [{"id": "n527", "label": "A unit of two or more people who interact and coordinate work to accomplish a specific goal（两个或以上成员协调实现共同目标）", "children": [], "note": "Connects specialised tasks so they produce coherent organisational outcomes（协调工作）."}, {"id": "n528", "label": "Four components（四个组成）", "children": [{"id": "n529", "label": "Two or more people（两人以上）", "children": [], "note": "Defines a team as involving multiple members rather than individual work（两人以上）."}, {"id": "n530", "label": "Regular interaction（持续互动）", "children": []}, {"id": "n531", "label": "Shared performance goal（共享绩效目标）", "children": []}, {"id": "n532", "label": "Commitment and mutual accountability（承诺与相互负责）", "children": [], "note": "Ensures members take responsibility for promises, behaviour, and results（问责）."}]}]}, {"id": "n533", "label": "Groups vs teams（群体vs团队）", "children": [{"id": "n534", "label": "Groups（群体）", "children": [{"id": "n535", "label": "Designated strong leader（指定领导者）", "children": []}, {"id": "n536", "label": "Individual accountability（个人负责）", "children": [], "note": "Ensures members take responsibility for promises, behaviour, and results（问责）."}, {"id": "n537", "label": "Identical purpose to organisation（目标与组织一致但不一定共享愿景）", "children": []}, {"id": "n538", "label": "Individual work products（个人成果）", "children": []}, {"id": "n539", "label": "Leader delegates work（领导分派工作）", "children": []}]}, {"id": "n540", "label": "Teams（团队）", "children": [{"id": "n541", "label": "Shared or rotated leadership（共享/轮换领导）", "children": [], "note": "Explains influence processes that move people toward organisational goals（领导）."}, {"id": "n542", "label": "Mutual accountability（相互负责）", "children": [], "note": "Ensures members take responsibility for promises, behaviour, and results（问责）."}, {"id": "n543", "label": "Specific team vision or purpose（团队愿景/目标）", "children": []}, {"id": "n544", "label": "Collective work products（集体成果）", "children": []}, {"id": "n545", "label": "Members discuss, decide and share work（共同讨论决策）", "children": []}]}]}, {"id": "n546", "label": "Contributions of teams（团队贡献）", "children": [{"id": "n547", "label": "Creativity and innovation（创造力与创新）", "children": [], "note": "Teams can combine perspectives to produce better ideas and improvements（创新创造）."}, {"id": "n548", "label": "Improved quality（质量提升）", "children": [], "note": "Teams can improve work quality through shared checking, learning, and expertise（质量提升）."}, {"id": "n549", "label": "Speed of response（响应速度）", "children": []}, {"id": "n550", "label": "Higher productivity and lower costs（高生产率与低成本）", "children": []}, {"id": "n551", "label": "Enhanced motivation and satisfaction（动机与满意度提升）", "children": [], "note": "The forces that direct, energise, and sustain work behaviour toward goals（激励）."}, {"id": "n552", "label": "Stronger competitive advantage and organisational performance（竞争优势与绩效）", "children": [], "note": "Creates a position that allows the organisation to outperform rivals（竞争优势）."}]}, {"id": "n553", "label": "Types of teams（团队类型）", "children": [{"id": "n554", "label": "Functional/command teams（职能/指挥团队） — manager + subordinates", "children": [], "note": "Groups jobs by specialised function to build expertise and efficiency（职能结构）."}, {"id": "n555", "label": "Cross-functional teams（跨职能团队） — members from different departments/specialisations", "children": [], "note": "Groups jobs by specialised function to build expertise and efficiency（职能结构）."}, {"id": "n556", "label": "Self-managed teams（自我管理团队） — multiskilled employees rotating jobs and managing an entire work process", "children": [], "note": "Gives the team responsibility for planning, workflow, and performance control（自我管理团队）."}, {"id": "n557", "label": "Virtual teams（虚拟团队） — geographically distant members collaborate with technology", "children": [], "note": "Uses digital coordination and partners rather than relying on one physical location（虚拟组织）."}]}, {"id": "n558", "label": "Dilemma and dysfunctions（团队困境与失灵）", "children": [{"id": "n559", "label": "Fear of giving up independence（害怕失去独立性）", "children": []}, {"id": "n560", "label": "Fear of free-riding/social loafing（搭便车/社会惰化）", "children": []}, {"id": "n561", "label": "Fear of conflict or unfair workload（冲突或不公平工作量）", "children": []}, {"id": "n562", "label": "Five dysfunctions（五大功能障碍）", "children": [{"id": "n563", "label": "Absence of trust（缺乏信任）", "children": [], "note": "A team dysfunction where members hide weaknesses and avoid vulnerability（缺乏信任）."}, {"id": "n564", "label": "Fear of conflict（害怕冲突）", "children": [], "note": "A team dysfunction where members avoid productive debate and honest disagreement（害怕冲突）."}, {"id": "n565", "label": "Lack of commitment（缺乏承诺）", "children": [], "note": "A team dysfunction where ambiguity or weak buy-in reduces follow-through（缺乏承诺）."}, {"id": "n566", "label": "Avoidance of accountability（逃避责任）", "children": [], "note": "A team dysfunction where members do not challenge poor performance or behaviour（逃避问责）."}, {"id": "n567", "label": "Inattention to results（忽视结果）", "children": [], "note": "A team dysfunction where personal goals or status outrank collective outcomes（忽视结果）."}]}]}, {"id": "n568", "label": "Team effectiveness model（团队有效性模型）", "children": [{"id": "n569", "label": "Managers build effective teams through specific actions（管理者塑造团队）", "children": []}, {"id": "n570", "label": "Outcomes（结果）", "children": [{"id": "n571", "label": "Productive output（生产性产出）", "children": [], "note": "One outcome of team effectiveness: work results that meet quantity and quality expectations（生产性产出）."}, {"id": "n572", "label": "Personal satisfaction（成员满意）", "children": [], "note": "One outcome of team effectiveness: members feel valued and motivated（个人满意）."}, {"id": "n573", "label": "Capacity to adapt and learn（适应与学习能力）", "children": [], "note": "One outcome of team effectiveness: the team improves over time（适应学习）."}]}, {"id": "n574", "label": "Team characteristics（团队特征）", "children": [{"id": "n575", "label": "Size（规模） — large enough for skills, small enough for coordination", "children": []}, {"id": "n576", "label": "Diversity（多样性） — improves ideas but requires inclusion", "children": []}, {"id": "n577", "label": "Roles（角色） — clarity reduces conflict", "children": []}, {"id": "n578", "label": "Norms（规范） — shared standards of behaviour", "children": [], "note": "Benchmarks used to judge whether performance is acceptable（控制标准）."}, {"id": "n579", "label": "Cohesiveness（凝聚力） — attraction and motivation to remain in team", "children": [], "note": "The forces that direct, energise, and sustain work behaviour toward goals（激励）."}]}]}, {"id": "n580", "label": "Stages of team development（团队发展阶段）", "children": [{"id": "n581", "label": "Forming（形成期） — orientation and acquaintance", "children": []}, {"id": "n582", "label": "Storming（震荡期） — conflict, role clarification, power struggles", "children": [], "note": "A learned need to influence others or control resources and outcomes（权力需求）."}, {"id": "n583", "label": "Norming（规范期） — shared expectations and cohesion develop", "children": []}, {"id": "n584", "label": "Performing（执行期） — effective collaboration and task focus", "children": []}, {"id": "n585", "label": "Adjourning（解散期） — task completion and transition", "children": []}]}, {"id": "n586", "label": "Virtual and global teams（虚拟与全球团队）", "children": [{"id": "n587", "label": "Advantages（优势） — flexibility, talent access, collaboration across distance", "children": []}, {"id": "n588", "label": "Challenges（挑战）", "children": [{"id": "n589", "label": "Communication barriers（沟通障碍）", "children": [], "note": "Explains how information and meaning are exchanged so organising and leading can happen（沟通）."}, {"id": "n590", "label": "Cultural differences（文化差异）", "children": []}, {"id": "n591", "label": "Time zones（时区）", "children": []}, {"id": "n592", "label": "Trust and collaboration（信任与协作）", "children": []}, {"id": "n593", "label": "Technology dependence（技术依赖）", "children": []}]}, {"id": "n594", "label": "Effective virtual leaders（有效虚拟团队领导）", "children": [{"id": "n595", "label": "Clarify goals and roles（明确目标与角色）", "children": []}, {"id": "n596", "label": "Build trust deliberately（主动建立信任）", "children": [], "note": "Creates confidence that members will act competently, honestly, and supportively（建立信任）."}, {"id": "n597", "label": "Use rich communication when needed（必要时用高丰富度沟通）", "children": [], "note": "Explains how information and meaning are exchanged so organising and leading can happen（沟通）."}, {"id": "n598", "label": "Set communication norms（设定沟通规范）", "children": [], "note": "Explains how information and meaning are exchanged so organising and leading can happen（沟通）."}]}]}, {"id": "n599", "label": "Team conflict and negotiation（团队冲突与谈判）", "children": [{"id": "n600", "label": "Conflict = antagonistic interaction where one party blocks another’s goals（阻碍对方目标的对立互动）", "children": []}, {"id": "n601", "label": "Causes（原因）: different goals, communication issues, role ambiguity（目标差异、沟通问题、角色模糊）", "children": [], "note": "Explains how information and meaning are exchanged so organising and leading can happen（沟通）."}, {"id": "n602", "label": "Conflict management styles（冲突处理风格）: avoiding, competing, accommodating, compromising, collaborating", "children": [], "note": "A system that provides information managers use for monitoring and decisions（管理信息系统）."}, {"id": "n603", "label": "Negotiation types（谈判类型）", "children": [{"id": "n604", "label": "Distributive negotiation（分配式/零和）", "children": [], "note": "A bargaining approach that divides a fixed amount of value between parties（分配式谈判）."}, {"id": "n605", "label": "Integrative negotiation（整合式/合作） — win–win focus", "children": []}]}, {"id": "n606", "label": "Win–win rules（双赢规则）", "children": [{"id": "n607", "label": "Separate the people from the problem（人事分离）", "children": []}, {"id": "n608", "label": "Focus on interests, not positions（关注利益而非立场）", "children": []}, {"id": "n609", "label": "Generate options for mutual gain（创造共同收益方案）", "children": []}, {"id": "n610", "label": "Use objective criteria（使用客观标准）", "children": []}]}]}]}, {"id": "n611", "label": "Topic 10 - Decision Making（决策）", "children": [{"id": "n612", "label": "What is decision making?（什么是决策）", "children": [{"id": "n613", "label": "Process of identifying a problem or opportunity and choosing among alternatives（识别问题/机会并选择方案）", "children": []}, {"id": "n614", "label": "Essential management activity（核心管理活动）", "children": []}, {"id": "n615", "label": "Success depends on making the right choices（组织成败取决于决策质量）", "children": []}, {"id": "n616", "label": "Mintzberg link（明茨伯格联系） — decision roles are central to managers’ work", "children": []}]}, {"id": "n617", "label": "Types of decisions（决策类型）", "children": [{"id": "n618", "label": "Routine problems（常规问题） → programmed decisions（程序化决策）", "children": [{"id": "n619", "label": "Arise regularly（经常出现）", "children": []}, {"id": "n620", "label": "Can be addressed through standard responses（标准化回应）", "children": []}]}, {"id": "n621", "label": "Non-routine problems（非常规问题） → non-programmed/crafted decisions（非程序化/定制决策）", "children": [{"id": "n622", "label": "Unique and new（独特且新）", "children": []}, {"id": "n623", "label": "Need creative problem solving（需要创造性解决）", "children": []}]}, {"id": "n624", "label": "Conditions（决策条件）", "children": [{"id": "n625", "label": "Certainty（确定性）", "children": []}, {"id": "n626", "label": "Risk（风险）", "children": []}, {"id": "n627", "label": "Uncertainty（不确定性）", "children": []}]}]}, {"id": "n628", "label": "Decision-making process（决策过程）", "children": [{"id": "n629", "label": "Course PPT 5-step version（PPT五步）", "children": [{"id": "n630", "label": "Identify the problem（识别问题）", "children": []}, {"id": "n631", "label": "Generate alternatives（生成备选方案）", "children": [], "note": "Creates possible solutions before choosing among them（生成备选方案）."}, {"id": "n632", "label": "Evaluate options（评估方案）", "children": [], "note": "Compares alternatives against criteria, risks, and consequences（评估选项）."}, {"id": "n633", "label": "Choose solution（选择方案）", "children": []}, {"id": "n634", "label": "Implement and review（执行与回顾）", "children": []}]}, {"id": "n635", "label": "PDF systematic 4-step logic（PDF四步逻辑）", "children": [{"id": "n636", "label": "Define and assess the real problem/opportunity（定义与评估问题/机会）", "children": []}, {"id": "n637", "label": "Identify priorities and criteria（识别优先事项与标准）", "children": [], "note": "Defines what matters most and how alternatives will be judged（优先级标准）."}, {"id": "n638", "label": "Select the best or most appropriate alternative（选择最合适方案）", "children": []}, {"id": "n639", "label": "Put decision into action and prepare contingencies（执行并准备应急方案）", "children": []}]}, {"id": "n640", "label": "Rational model detailed flow（理性模型详细流程）", "children": [{"id": "n641", "label": "Clarify goal（明确目标）", "children": []}, {"id": "n642", "label": "Define problem（定义问题）", "children": []}, {"id": "n643", "label": "Identify decision criteria（识别标准）", "children": []}, {"id": "n644", "label": "Weight criteria（赋权）", "children": []}, {"id": "n645", "label": "Generate options（生成选项）", "children": []}, {"id": "n646", "label": "Analyse situation/evaluate options（分析情境/评估选项）", "children": [], "note": "Compares alternatives against criteria, risks, and consequences（评估选项）."}, {"id": "n647", "label": "Choose highest scored option（选择最高分方案）", "children": []}]}]}, {"id": "n648", "label": "Decision models（决策模型）", "children": [{"id": "n649", "label": "Classical/rational decision model（古典/理性模型）", "children": [{"id": "n650", "label": "Complete certainty（完全确定）", "children": [], "note": "A condition where outcomes and relevant information are assumed to be known（完全确定）."}, {"id": "n651", "label": "All alternatives known（知道所有备选方案）", "children": []}, {"id": "n652", "label": "Internally consistent and logical（内部一致且逻辑清晰）", "children": []}, {"id": "n653", "label": "Fully informed（信息充分）", "children": []}]}, {"id": "n654", "label": "Behavioural decision theory / bounded rationality（行为决策/有限理性）", "children": [{"id": "n655", "label": "Perception shapes interpretations of context, problem, priorities, stakeholders and solutions（感知影响解释）", "children": [], "note": "Considers obligations to groups affected by organisational decisions（利益相关者）."}, {"id": "n656", "label": "Limited information and cognitive limits（信息和认知限制）", "children": []}, {"id": "n657", "label": "Satisficing（满意化） — choose a good-enough option rather than optimal", "children": []}]}, {"id": "n658", "label": "Political decision making（政治性决策）", "children": [{"id": "n659", "label": "Preferences, power, negotiation and interests affect choices（偏好、权力、谈判与利益）", "children": [], "note": "A learned need to influence others or control resources and outcomes（权力需求）."}]}, {"id": "n660", "label": "Garbage can model（垃圾桶模型）", "children": [{"id": "n661", "label": "Problems, solutions, participants and situations flow together（问题、方案、参与者、情境混合）", "children": []}, {"id": "n662", "label": "Useful for complex, dynamic, unclear goals and changing technology（适合复杂动态环境）", "children": []}, {"id": "n663", "label": "Decisions may be opportunistic and non-linear（机会主义且非线性）", "children": []}]}]}, {"id": "n664", "label": "Intuition, heuristics and creativity（直觉、启发式与创造力）", "children": [{"id": "n665", "label": "Intuition（直觉）", "children": [{"id": "n666", "label": "Recognise possibilities quickly（快速识别可能性）", "children": []}, {"id": "n667", "label": "Useful in non-programmed decisions（有助于非程序化决策）", "children": []}, {"id": "n668", "label": "Adds spontaneity and potential for innovation（增加自发性和创新）", "children": []}]}, {"id": "n669", "label": "Heuristics（启发式/经验法则）", "children": [{"id": "n670", "label": "Mental shortcuts that reduce cognitive load（减少认知负担）", "children": []}, {"id": "n671", "label": "Useful under uncertainty but can cause bias（有用但可能导致偏差）", "children": []}, {"id": "n672", "label": "Confirmation trap（确认陷阱）", "children": []}, {"id": "n673", "label": "Hindsight trap（后见之明陷阱）", "children": []}, {"id": "n674", "label": "Overconfidence, anchoring, selective perception（过度自信、锚定、选择性感知）", "children": []}]}, {"id": "n675", "label": "Creativity（创造力）", "children": [{"id": "n676", "label": "Develop unique and novel responses to problems/opportunities（提出新颖回应）", "children": []}, {"id": "n677", "label": "Important for crafted decisions in dynamic environments（动态环境中的定制决策关键）", "children": []}]}]}, {"id": "n678", "label": "Group decision making（群体决策）", "children": [{"id": "n679", "label": "Benefits（优点）", "children": [{"id": "n680", "label": "More information and knowledge（更多信息与知识）", "children": []}, {"id": "n681", "label": "Diverse perspectives and alternatives（多样观点和方案）", "children": []}, {"id": "n682", "label": "Shared understanding and commitment（共享理解与承诺）", "children": []}]}, {"id": "n683", "label": "Risks（风险）", "children": [{"id": "n684", "label": "Groupthink（群体迷思） — unwilling to criticise ideas", "children": [], "note": "A risk where pressure for agreement suppresses critical evaluation（群体思维）."}, {"id": "n685", "label": "Conflict（冲突） and organisational politics（组织政治）", "children": []}, {"id": "n686", "label": "Escalating commitment（承诺升级） — continue failing course of action despite negative feedback", "children": [], "note": "Continuing to invest in a failing choice because of prior commitment（承诺升级）."}]}, {"id": "n687", "label": "Methods/techniques（方法）", "children": [{"id": "n688", "label": "Sole decision maker（个人决策）", "children": []}, {"id": "n689", "label": "Consultative participation（咨询式参与）", "children": []}, {"id": "n690", "label": "Consensus（共识）", "children": [], "note": "A group decision method where members can support the final choice even without full agreement（共识）."}, {"id": "n691", "label": "Majority rule（多数投票）", "children": []}]}]}, {"id": "n692", "label": "Ethics and social responsibility in decisions（决策中的伦理与社会责任）", "children": [{"id": "n693", "label": "Identify all stakeholders（识别所有利益相关者）", "children": [], "note": "Considers obligations to groups affected by organisational decisions（利益相关者）."}, {"id": "n694", "label": "State facts of the decision（说明事实）", "children": [], "note": "Separates known evidence from assumptions before judging an ethical issue（陈述事实）."}, {"id": "n695", "label": "Highlight relevant principles, values and codes（明确原则、价值和规范）", "children": []}, {"id": "n696", "label": "Assess who benefits and who may be harmed（评估受益与受害者）", "children": []}, {"id": "n697", "label": "Consider rights, fairness and broader consequences（考虑权利、公平和后果）", "children": []}]}, {"id": "n698", "label": "Current issues（当代议题）", "children": [{"id": "n699", "label": "Culture（文化） — high power-distance cultures may expect supervisors to decide", "children": [], "note": "A learned need to influence others or control resources and outcomes（权力需求）."}, {"id": "n700", "label": "Technology and AI（技术与AI） — expert systems, fuzzy logic, neural networks", "children": [], "note": "Views the organisation as interdependent parts interacting with the wider environment（系统观）."}, {"id": "n701", "label": "Talk trap（空谈陷阱） — strong verbal arguments can win decisions but fail implementation", "children": [], "note": "A group risk where discussion sounds good but does not translate into implementation（空谈陷阱）."}, {"id": "n702", "label": "Knowing–doing gap（知行差距） — decisions must translate into action", "children": []}]}]}, {"id": "n703", "label": "Exam Integration Map（考试整合）", "children": [{"id": "n704", "label": "Environment to strategy to structure（环境-战略-结构）", "children": [{"id": "n705", "label": "Topic 02 environment analysis（环境分析）", "children": [], "note": "Roadmap entry for this topic; use it to locate the topic within the overall MOL sequence（课程定位）."}, {"id": "n706", "label": "Topic 04 planning and strategy（计划战略）", "children": [], "note": "Roadmap entry for this topic; use it to locate the topic within the overall MOL sequence（课程定位）."}, {"id": "n707", "label": "Topic 06 structure fit（结构匹配）", "children": [], "note": "Roadmap entry for this topic; use it to locate the topic within the overall MOL sequence（课程定位）."}]}, {"id": "n708", "label": "People leadership and performance（人-领导-绩效）", "children": [{"id": "n709", "label": "Topic 05 leadership influence（领导影响）", "children": [], "note": "Roadmap entry for this topic; use it to locate the topic within the overall MOL sequence（课程定位）."}, {"id": "n710", "label": "Topic 08 motivation drivers（激励驱动）", "children": [], "note": "Roadmap entry for this topic; use it to locate the topic within the overall MOL sequence（课程定位）."}, {"id": "n711", "label": "Topic 09 teamwork dynamics（团队动态）", "children": [], "note": "Roadmap entry for this topic; use it to locate the topic within the overall MOL sequence（课程定位）."}]}, {"id": "n712", "label": "Communication conflict and decisions（沟通-冲突-决策）", "children": [{"id": "n713", "label": "Topic 03 communication skills（沟通技能）", "children": [], "note": "Roadmap entry for this topic; use it to locate the topic within the overall MOL sequence（课程定位）."}, {"id": "n714", "label": "Topic 09 team conflict（团队冲突）", "children": [], "note": "Roadmap entry for this topic; use it to locate the topic within the overall MOL sequence（课程定位）."}, {"id": "n715", "label": "Topic 10 group decision making（群体决策）", "children": [], "note": "Roadmap entry for this topic; use it to locate the topic within the overall MOL sequence（课程定位）."}]}, {"id": "n716", "label": "Control ethics and responsibility（控制-伦理-责任）", "children": [{"id": "n717", "label": "Topic 07 control systems（控制系统）", "children": [], "note": "Roadmap entry for this topic; use it to locate the topic within the overall MOL sequence（课程定位）."}, {"id": "n718", "label": "Topic 06 structural power and incentives（结构权力激励）", "children": [], "note": "Roadmap entry for this topic; use it to locate the topic within the overall MOL sequence（课程定位）."}, {"id": "n719", "label": "Topic 10 ethical decision making（伦理决策）", "children": [], "note": "Roadmap entry for this topic; use it to locate the topic within the overall MOL sequence（课程定位）."}]}, {"id": "n720", "label": "Historical theories to contemporary practice（历史理论-当代实践）", "children": [{"id": "n721", "label": "Topic 01 historical schools（历史学派）", "children": [], "note": "Roadmap entry for this topic; use it to locate the topic within the overall MOL sequence（课程定位）."}, {"id": "n722", "label": "Apply to case analysis（应用到案例分析）", "children": []}, {"id": "n723", "label": "Compare fit benefits and limitations（比较适配优势局限）", "children": [], "note": "Evaluates actual performance against standards to identify gaps（比较差距）."}]}]}]}</script>
+  <script>
+    const rawData = JSON.parse(document.getElementById("mindmap-data").textContent);
+
+    const state = {
+      collapsed: new Set(),
+      selectedId: rawData.id,
+      notesVisible: true,
+      nodeById: new Map(),
+      parentById: new Map(),
+      depthById: new Map(),
+      paletteById: new Map(),
+      total: 0,
+      maxDepth: 0
+    };
+
+    const dom = {
+      tree: document.getElementById("tree"),
+      emptyState: document.getElementById("emptyState"),
+      rootToggleSign: document.getElementById("rootToggleSign"),
+      rootCountLabel: document.getElementById("rootCountLabel"),
+      topicView: document.getElementById("topicView"),
+      expandAll: document.getElementById("expandAll"),
+      collapseAll: document.getElementById("collapseAll"),
+      toggleNotes: document.getElementById("toggleNotes")
+    };
+
+    const branchPalettes = [
+      { accent: "#2563eb", text: "#102a56", soft: "#ecf4ff", soft2: "#ffffff", line: "#bfd0f7", chip: "#dceafe", selected: "#b4463d" },
+      { accent: "#16805d", text: "#113d31", soft: "#edf9f4", soft2: "#ffffff", line: "#b8dece", chip: "#dcf5eb", selected: "#b4463d" },
+      { accent: "#7c3fa0", text: "#3a2250", soft: "#f5effb", soft2: "#ffffff", line: "#dcc4ec", chip: "#f0e2fa", selected: "#b4463d" },
+      { accent: "#b77900", text: "#553a03", soft: "#fff7e6", soft2: "#ffffff", line: "#efd49a", chip: "#fff0c9", selected: "#b4463d" },
+      { accent: "#c2413b", text: "#55201f", soft: "#fff1f0", soft2: "#ffffff", line: "#efc0bd", chip: "#ffe1de", selected: "#8e2d2a" },
+      { accent: "#0f766e", text: "#113f3d", soft: "#e9faf7", soft2: "#ffffff", line: "#b2dfda", chip: "#d8f3ef", selected: "#b4463d" },
+      { accent: "#4f46e5", text: "#242462", soft: "#eef0ff", soft2: "#ffffff", line: "#c8cbff", chip: "#e1e4ff", selected: "#b4463d" },
+      { accent: "#5f7f28", text: "#293c14", soft: "#f3f8ea", soft2: "#ffffff", line: "#cfdfa9", chip: "#e8f3d4", selected: "#b4463d" },
+      { accent: "#be5d16", text: "#542b0e", soft: "#fff2e8", soft2: "#ffffff", line: "#efc6a8", chip: "#ffe3d0", selected: "#9b3b14" },
+      { accent: "#2a7ea0", text: "#143c4c", soft: "#ecf8fc", soft2: "#ffffff", line: "#b7dce8", chip: "#d9f1f8", selected: "#b4463d" },
+      { accent: "#9b4f78", text: "#4b263d", soft: "#fbf0f6", soft2: "#ffffff", line: "#e4bed4", chip: "#f7ddea", selected: "#8f315b" },
+      { accent: "#68723a", text: "#34391d", soft: "#f6f7ee", soft2: "#ffffff", line: "#d6d9b7", chip: "#ecefd7", selected: "#b4463d" }
+    ];
+
+    function walk(node, depth = 0, parent = null, visitor = () => {}) {
+      state.nodeById.set(node.id, node);
+      state.depthById.set(node.id, depth);
+      if (parent) state.parentById.set(node.id, parent.id);
+      state.total += 1;
+      state.maxDepth = Math.max(state.maxDepth, depth);
+      visitor(node, depth, parent);
+      node.children.forEach(child => walk(child, depth + 1, node, visitor));
+    }
+
+    walk(rawData);
+
+    function assignPalette(node, palette) {
+      state.paletteById.set(node.id, palette);
+      node.children.forEach(child => assignPalette(child, palette));
+    }
+
+    function assignBranchPalettes() {
+      state.paletteById.set(rawData.id, branchPalettes[0]);
+      rawData.children.forEach((child, index) => {
+        assignPalette(child, branchPalettes[index % branchPalettes.length]);
+      });
+    }
+
+    assignBranchPalettes();
+
+    function applyPalette(element, node) {
+      const palette = state.paletteById.get(node.id) || branchPalettes[0];
+      element.style.setProperty("--accent", palette.accent);
+      element.style.setProperty("--accent-text", palette.text);
+      element.style.setProperty("--accent-soft", palette.soft);
+      element.style.setProperty("--accent-soft-2", palette.soft2);
+      element.style.setProperty("--accent-line", palette.line);
+      element.style.setProperty("--accent-chip", palette.chip);
+      element.style.setProperty("--selected-accent", palette.selected);
+    }
+
+    function descendants(node) {
+      return node.children.reduce((total, child) => total + 1 + descendants(child), 0);
+    }
+
+    function topicOneId() {
+      const topic = rawData.children.find(node => /^Topic 01\b/.test(node.label));
+      return topic ? topic.id : null;
+    }
+
+    function isTopic(node) {
+      return /^Topic \d+/.test(node.label) || node.label.startsWith("Exam Integration");
+    }
+
+    function compactLabel(label) {
+      return label.replace(/\s+[—-]\s+/g, " - ");
+    }
+
+    function collapseBranch(id, includeSelf = true) {
+      const node = state.nodeById.get(id);
+      if (!node) return;
+      if (includeSelf && node.children.length) state.collapsed.add(id);
+      node.children.forEach(child => collapseBranch(child.id, true));
+    }
+
+    function expandAncestors(id) {
+      let current = id;
+      while (state.parentById.has(current)) {
+        current = state.parentById.get(current);
+        state.collapsed.delete(current);
+      }
+    }
+
+    function setInitialState() {
+      state.collapsed.clear();
+      const topicOne = topicOneId();
+      for (const [id, node] of state.nodeById) {
+        if (id !== rawData.id && id !== topicOne && node.children.length) state.collapsed.add(id);
+      }
+      state.selectedId = topicOne || rawData.id;
+    }
+
+    function showTopicOverview() {
+      state.collapsed.clear();
+      for (const [id, node] of state.nodeById) {
+        if (id !== rawData.id && node.children.length) state.collapsed.add(id);
+      }
+      state.selectedId = rawData.id;
+      render();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function expandAllNodes() {
+      state.collapsed.clear();
+      render();
+    }
+
+    function collapseAllNodes() {
+      showTopicOverview();
+    }
+
+    function toggleNode(id) {
+      const node = state.nodeById.get(id);
+      if (!node) return;
+      state.selectedId = id;
+      if (node.children.length) {
+        if (state.collapsed.has(id)) {
+          expandAncestors(id);
+          state.collapsed.delete(id);
+        } else {
+          state.collapsed.add(id);
+        }
+      }
+      render();
+    }
+
+    function createEl(tag, className, text = "") {
+      const element = document.createElement(tag);
+      if (className) element.className = className;
+      if (text) element.textContent = text;
+      return element;
+    }
+
+    function nodeToggleSign(node) {
+      if (!node.children.length) return "";
+      return state.collapsed.has(node.id) ? "+" : "-";
+    }
+
+    function nodeCountText(node) {
+      if (!node.children.length) return "";
+      return String(node.children.length);
+    }
+
+    const preferredKeyPhrases = [
+      "defined objectives",
+      "business activities",
+      "coordination",
+      "Organisation",
+      "Management",
+      "efficiency",
+      "effectiveness",
+      "minimal resources",
+      "doing things right",
+      "stated goals",
+      "right things",
+      "organisational performance",
+      "management foundations",
+      "manager work",
+      "planning",
+      "organising",
+      "structure",
+      "leading",
+      "controlling",
+      "communication",
+      "leadership",
+      "motivation",
+      "teamwork",
+      "decision making",
+      "certainty",
+      "risk",
+      "uncertainty",
+      "ethical pressure",
+      "external environment",
+      "internal environment",
+      "general environment",
+      "task environment",
+      "organisational culture",
+      "globalisation",
+      "strategy",
+      "goals",
+      "feedback",
+      "performance",
+      "resources"
+    ];
+
+    const highlightStopWords = new Set([
+      "a", "an", "and", "are", "as", "be", "by", "can", "for", "from", "how", "in", "into",
+      "is", "of", "on", "or", "so", "that", "the", "through", "to", "under", "using", "with",
+      "without", "explains", "describes", "shows", "supports", "represents", "connects",
+      "uses", "views", "highlights", "practical", "concept", "analysing"
+    ]);
+
+    function cleanConceptText(text) {
+      return text
+        .replace(/（[^）]*）/g, " ")
+        .replace(/\([^)]*\)/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function escapeRegExp(text) {
+      return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    }
+
+    function hasPhrase(text, phrase) {
+      return new RegExp(`(^|[^A-Za-z0-9])${escapeRegExp(phrase)}([^A-Za-z0-9]|$)`, "i").test(text);
+    }
+
+    function uniquePhrases(phrases) {
+      const seen = new Set();
+      return phrases.filter(phrase => {
+        const key = phrase.toLowerCase();
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+    }
+
+    function normalisePhrase(text) {
+      return cleanConceptText(text)
+        .toLowerCase()
+        .replace(/[^\p{L}\p{N}\s]/gu, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function meaningfulWords(text) {
+      return normalisePhrase(text)
+        .split(" ")
+        .filter(word => word && !highlightStopWords.has(word));
+    }
+
+    function isTitleRepeat(phrase, node) {
+      const phraseWords = meaningfulWords(phrase);
+      const titleWords = meaningfulWords(node.label);
+      if (!phraseWords.length || !titleWords.length) return false;
+
+      const phraseNormal = phraseWords.join(" ");
+      const titleNormal = titleWords.join(" ");
+      if (phraseNormal === titleNormal) return true;
+      if (phraseWords.every(word => titleWords.includes(word))) return true;
+
+      const sharedCount = phraseWords.filter(word => titleWords.includes(word)).length;
+      const coversMostOfTitle = titleWords.length >= 3
+        && phraseWords.length >= 3
+        && sharedCount / titleWords.length >= 0.72;
+      return coversMostOfTitle;
+    }
+
+    function fallbackPhrases(text, note) {
+      const groups = [];
+      let current = [];
+      cleanConceptText(text)
+        .replace(/[^\p{L}\p{N}\s-]/gu, " ")
+        .split(/\s+/)
+        .filter(Boolean)
+        .forEach(word => {
+          const normal = word.toLowerCase();
+          if (highlightStopWords.has(normal)) {
+            if (current.length) groups.push(current.join(" "));
+            current = [];
+            return;
+          }
+          current.push(word);
+          if (current.length === 3) {
+            groups.push(current.join(" "));
+            current = [];
+          }
+        });
+      if (current.length) groups.push(current.join(" "));
+
+      return groups
+        .map(phrase => phrase.trim())
+        .filter(phrase => phrase.length >= 4 && phrase.length <= 42 && hasPhrase(note, phrase));
+    }
+
+    function highlightPhrases(node) {
+      const note = node.note || "";
+      const conceptMatch = note.match(/^Explains\s+(.+?)\s+as a practical concept/i);
+      const conceptText = cleanConceptText(conceptMatch ? conceptMatch[1] : node.label);
+      const candidates = [];
+
+      preferredKeyPhrases.forEach(phrase => {
+        if (hasPhrase(conceptText, phrase) && hasPhrase(note, phrase)) candidates.push(phrase);
+      });
+
+      conceptText.split(/\s*(?:→|=|\/|;|,)\s*/).forEach(part => {
+        const phrase = part.trim();
+        if (phrase.length >= 4 && phrase.length <= 42 && hasPhrase(note, phrase)) candidates.push(phrase);
+      });
+
+      let filtered = uniquePhrases(candidates).filter(phrase => !isTitleRepeat(phrase, node));
+
+      if (filtered.length < 2) {
+        preferredKeyPhrases.forEach(phrase => {
+          if (hasPhrase(note, phrase) && !isTitleRepeat(phrase, node)) filtered.push(phrase);
+        });
+      }
+      if (filtered.length < 2) fallbackPhrases(conceptText, note).forEach(phrase => filtered.push(phrase));
+      if (filtered.length < 2) fallbackPhrases(note, note).forEach(phrase => filtered.push(phrase));
+
+      return uniquePhrases(filtered)
+        .filter(phrase => !isTitleRepeat(phrase, node))
+        .slice(0, 3);
+    }
+
+    function appendHighlightedText(container, text, phrases) {
+      const matches = [];
+      phrases.forEach(phrase => {
+        const pattern = new RegExp(`(^|[^A-Za-z0-9])(${escapeRegExp(phrase)})(?=[^A-Za-z0-9]|$)`, "i");
+        const match = text.match(pattern);
+        if (!match) return;
+        const start = (match.index || 0) + match[1].length;
+        matches.push({ start, end: start + match[2].length });
+      });
+
+      matches.sort((a, b) => a.start - b.start || b.end - a.end);
+      const nonOverlapping = [];
+      matches.forEach(match => {
+        if (!nonOverlapping.some(existing => match.start < existing.end && match.end > existing.start)) {
+          nonOverlapping.push(match);
+        }
+      });
+
+      let cursor = 0;
+      nonOverlapping.forEach(match => {
+        if (match.start > cursor) container.append(document.createTextNode(text.slice(cursor, match.start)));
+        const key = createEl("mark", "note-key", text.slice(match.start, match.end));
+        container.append(key);
+        cursor = match.end;
+      });
+      if (cursor < text.length) container.append(document.createTextNode(text.slice(cursor)));
+    }
+
+    function renderNote(node) {
+      const note = createEl("span", "node-note");
+      appendHighlightedText(note, node.note, highlightPhrases(node));
+      return note;
+    }
+
+    function renderNode(node) {
+      const depth = state.depthById.get(node.id) || 0;
+      const item = createEl("li", `tree-item depth-${depth}${state.selectedId === node.id ? " selected" : ""}`);
+      item.dataset.nodeId = node.id;
+      applyPalette(item, node);
+
+      const card = createEl("button", [
+        "node-card",
+        node.children.length ? "has-children" : "leaf-card",
+        !node.children.length && node.note ? "has-note" : "",
+        isTopic(node) ? "topic-card" : ""
+      ].filter(Boolean).join(" "));
+      card.type = "button";
+      if (node.children.length) card.setAttribute("aria-expanded", String(!state.collapsed.has(node.id)));
+      card.setAttribute("aria-label", node.children.length
+        ? `${state.collapsed.has(node.id) ? "Expand" : "Collapse"} ${node.label}, ${node.children.length} branches`
+        : node.label);
+      card.addEventListener("click", () => toggleNode(node.id));
+
+      if (node.children.length) card.append(createEl("span", "toggle-chip", nodeToggleSign(node)));
+
+      const content = createEl("span", "node-content");
+      content.append(createEl("span", "node-title", compactLabel(node.label)));
+
+      if (node.children.length) {
+        content.append(createEl("span", "node-meta", `${node.children.length} branches · ${descendants(node)} concepts`));
+      } else if (node.note) {
+        content.append(renderNote(node));
+      }
+
+      card.append(content);
+      if (node.children.length) card.append(createEl("span", "count-chip", nodeCountText(node)));
+      item.append(card);
+
+      if (node.children.length && !state.collapsed.has(node.id)) {
+        const children = createEl("ul", "children");
+        node.children.forEach(child => children.append(renderNode(child)));
+        item.append(children);
+      }
+
+      return item;
+    }
+
+    function updateRootToggle() {
+      dom.rootToggleSign.textContent = nodeToggleSign(rawData);
+      dom.rootCountLabel.textContent = nodeCountText(rawData);
+    }
+
+    function render() {
+      dom.tree.classList.toggle("compact-notes", !state.notesVisible);
+      dom.tree.innerHTML = "";
+      if (!rawData.children.length) {
+        dom.emptyState.classList.add("visible");
+        return;
+      }
+      dom.emptyState.classList.remove("visible");
+      rawData.children.forEach(child => dom.tree.append(renderNode(child)));
+      updateRootToggle();
+    }
+
+    function bindControls() {
+      document.getElementById("rootHeader").addEventListener("click", event => {
+        if (event.target.closest(".tool-button")) return;
+        toggleNode(rawData.id);
+      });
+      dom.topicView.addEventListener("click", showTopicOverview);
+      dom.expandAll.addEventListener("click", expandAllNodes);
+      dom.collapseAll.addEventListener("click", collapseAllNodes);
+      dom.toggleNotes.addEventListener("click", () => {
+        state.notesVisible = !state.notesVisible;
+        dom.toggleNotes.textContent = state.notesVisible ? "Notes On" : "Notes Off";
+        dom.toggleNotes.setAttribute("aria-pressed", String(state.notesVisible));
+        render();
+      });
+    }
+
+    function init() {
+      bindControls();
+      setInitialState();
+      render();
+    }
+
+    init();
+  </script>
+</body>
+</html>

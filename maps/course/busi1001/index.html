@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BUSI 1001 Business Law Topics 08-10 Mind Map</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --ink: #162234;
+      --muted: #61718a;
+      --line: #b9c8dc;
+      --line-soft: #dbe5f1;
+      --navy: #132f68;
+      --navy-2: #204286;
+      --accent: #2563eb;
+      --accent-text: #102a56;
+      --accent-soft: #eef5ff;
+      --accent-soft-2: #ffffff;
+      --accent-line: #bfcef1;
+      --accent-chip: #e7efff;
+      --selected-accent: #b4463d;
+      --card: #ffffff;
+      --shadow: 0 10px 22px rgba(30, 46, 78, 0.10);
+      --radius: 14px;
+      --tree-gap: 17px;
+      --branch-indent: clamp(22px, 3.4vw, 48px);
+      --branch-pad: clamp(18px, 2.4vw, 34px);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      min-height: 100%;
+      overflow-x: hidden;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--bg);
+    }
+
+    button, input {
+      font: inherit;
+      letter-spacing: 0;
+    }
+
+    .page {
+      width: min(100%, 1420px);
+      margin: 0 auto;
+      padding: 14px clamp(14px, 2.6vw, 42px) 64px;
+    }
+
+    .root-card {
+      position: sticky;
+      z-index: 10;
+      top: 10px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      min-width: 0;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 18px;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, #10275f 0%, var(--navy) 52%, var(--navy-2) 100%);
+      color: #ffffff;
+      box-shadow: 0 14px 32px rgba(19, 47, 104, 0.20);
+    }
+
+    .root-main {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      min-width: 0;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .root-title {
+      min-width: 0;
+      margin: 0;
+      overflow-wrap: anywhere;
+      text-wrap: balance;
+      font-size: clamp(21px, 2.5vw, 34px);
+      font-weight: 840;
+      line-height: 1.18;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 8px;
+    }
+
+    .tool-button {
+      min-height: 34px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 9px;
+      padding: 7px 11px;
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 760;
+      cursor: pointer;
+    }
+
+    .tool-button:hover,
+    .tool-button:focus-visible {
+      background: rgba(255, 255, 255, 0.22);
+      outline: none;
+    }
+
+    .tree {
+      position: relative;
+      display: grid;
+      gap: var(--tree-gap);
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .children {
+      position: relative;
+      display: grid;
+      gap: var(--tree-gap);
+      margin: 14px 0 0 var(--branch-indent);
+      padding: 0 0 0 var(--branch-pad);
+      border-left: 3px solid var(--accent-line);
+      list-style: none;
+    }
+
+    .tree-item {
+      position: relative;
+      min-width: 0;
+    }
+
+    .children > .tree-item::before {
+      content: "";
+      position: absolute;
+      left: calc(-1 * var(--branch-pad));
+      top: 25px;
+      width: var(--branch-pad);
+      border-top: 3px solid var(--accent-line);
+    }
+
+    .node-card {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      width: fit-content;
+      max-width: 100%;
+      min-width: min(100%, 320px);
+      align-items: flex-start;
+      gap: 11px;
+      border: 1px solid var(--line-soft);
+      border-left: 5px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 13px 18px;
+      background: linear-gradient(180deg, var(--card) 0%, #fbfdff 100%);
+      color: var(--ink);
+      box-shadow: var(--shadow);
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease, background 150ms ease;
+    }
+
+    .node-card:hover {
+      border-color: var(--accent-line);
+      box-shadow: 0 12px 25px rgba(30, 46, 78, 0.14);
+      transform: translateY(-1px);
+    }
+
+    .node-card:focus-visible {
+      outline: 3px solid rgba(29, 91, 191, 0.30);
+      outline-offset: 3px;
+    }
+
+    .node-card.has-children {
+      min-width: min(100%, 460px);
+    }
+
+    .depth-1 > .node-card,
+    .depth-2 > .node-card.topic-card {
+      border-color: var(--accent-line);
+      border-left-color: var(--accent);
+      background: linear-gradient(135deg, var(--accent-soft) 0%, var(--accent-soft-2) 100%);
+      color: var(--accent-text);
+    }
+
+    .tree-item.selected > .node-card {
+      border-color: var(--selected-accent);
+      box-shadow: 0 0 0 2px rgba(180, 70, 61, 0.16), var(--shadow);
+    }
+
+    .toggle-chip {
+      display: grid;
+      flex: 0 0 auto;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      border: 1px solid var(--accent-line);
+      border-radius: 8px;
+      background: #ffffff;
+      color: var(--accent-text);
+      font-size: 19px;
+      font-weight: 860;
+      line-height: 1;
+    }
+
+    .root-card .toggle-chip {
+      background: #ffffff;
+      color: var(--navy);
+    }
+
+    .count-chip {
+      display: grid;
+      flex: 0 0 auto;
+      width: 31px;
+      height: 31px;
+      place-items: center;
+      align-self: center;
+      border: 1px solid var(--accent-line);
+      border-radius: 999px;
+      background: var(--accent-chip);
+      color: var(--accent-text);
+      font-size: 14px;
+      font-weight: 860;
+      line-height: 1;
+    }
+
+    .root-card .count-chip {
+      border-color: rgba(255, 255, 255, 0.52);
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+    }
+
+    .node-content {
+      display: grid;
+      min-width: 0;
+      gap: 5px;
+    }
+
+    .node-title {
+      min-width: 0;
+      overflow-wrap: anywhere;
+      font-size: clamp(15px, 1.2vw, 20px);
+      font-weight: 790;
+      line-height: 1.24;
+    }
+
+    .depth-1 > .node-card .node-title,
+    .depth-2 > .node-card.topic-card .node-title {
+      font-size: clamp(17px, 1.45vw, 23px);
+      font-weight: 830;
+    }
+
+    .node-meta {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .node-note {
+      margin-top: 6px;
+      border-top: 1px solid var(--accent-line);
+      padding-top: 8px;
+      color: #425169;
+      font-size: clamp(15px, 1.05vw, 17px);
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .note-key {
+      border-radius: 5px;
+      padding: 0 0.18em;
+      background: var(--accent-chip);
+      color: var(--accent-text);
+      font-weight: 840;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+
+    .node-card.leaf-card {
+      grid-template-columns: minmax(0, 1fr);
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+
+    .node-card.leaf-card.has-note {
+      width: min(100%, 880px);
+      max-width: 880px;
+    }
+
+    .depth-3 > .node-card.leaf-card.has-note,
+    .depth-4 > .node-card.leaf-card.has-note,
+    .depth-5 > .node-card.leaf-card.has-note {
+      width: min(100%, 820px);
+      max-width: 820px;
+    }
+
+    .node-card.leaf-card .node-title {
+      font-size: clamp(16px, 1.18vw, 20px);
+      line-height: 1.28;
+    }
+
+    .tree.compact-notes .node-note {
+      display: none;
+    }
+
+    .empty {
+      display: none;
+      margin: 24px 0;
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius);
+      padding: 18px;
+      background: #ffffff;
+      color: var(--muted);
+      box-shadow: var(--shadow);
+    }
+
+    .empty.visible { display: block; }
+
+    @media (max-width: 760px) {
+      :root {
+        --tree-gap: 13px;
+        --branch-indent: 18px;
+        --branch-pad: 16px;
+      }
+
+      .page {
+        padding: 10px 10px 48px;
+      }
+
+      .root-card {
+        position: static;
+        grid-template-columns: 1fr;
+        padding: 14px;
+      }
+
+      .toolbar {
+        justify-content: flex-start;
+      }
+
+      .node-card,
+      .node-card.has-children {
+        width: 100%;
+        min-width: 0;
+        padding: 12px 13px;
+      }
+
+      .children {
+        margin-left: var(--branch-indent);
+      }
+    }
+  
+
+    @media print {
+      .root-card { position: static; break-after: avoid; }
+      .tool-button { display: none; }
+      .node-card { box-shadow: none; break-inside: avoid; }
+      .children { break-inside: avoid; }
+      body { background: #ffffff; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page" aria-label="Business Law Topics 08-10 vertical mind map">
+    <section class="root-card" id="rootHeader">
+      <div class="root-main">
+        <span class="toggle-chip" id="rootToggleSign">-</span>
+        <h1 class="root-title">BUSI 1001 Business Law Topics 08-10 Mind Map</h1>
+        <span class="count-chip" id="rootCountLabel">5</span>
+      </div>
+      <div class="toolbar" aria-label="Mind map controls">
+        <button class="tool-button" id="topicView" type="button">Topics</button>
+        <button class="tool-button" id="expandAll" type="button">Expand All</button>
+        <button class="tool-button" id="collapseAll" type="button">Collapse All</button>
+        <button class="tool-button" id="toggleNotes" type="button" aria-pressed="true">Notes On</button>
+      </div>
+    </section>
+
+    <ul class="tree" id="tree"></ul>
+    <div class="empty" id="emptyState">No visible nodes</div>
+  </main>
+
+  <script id="mindmap-data" type="application/json">{"id": "n524", "label": "BUSI 1001 Business Law Topics 08-10 Mind Map（商法8-10主题思维导图）", "children": [{"id": "n8", "label": "Overall logic（整体逻辑）", "children": [{"id": "n1", "label": "Topic 08 - Choose and regulate the business vehicle（选择并规制商业组织形式）", "children": [], "note": "Start with the legal form: liability, control, capital, lifespan and regulation determine the risk profile（先看组织形式和风险）."}, {"id": "n2", "label": "Topic 09 - Govern the company and control management power（公司治理与管理权约束）", "children": [], "note": "Once a company exists, directors and officers owe duties and members receive remedies（公司成立后看董事义务和股东救济）."}, {"id": "n3", "label": "Topic 10 - Audit, distress and external administration（审计、财务困境与外部管理）", "children": [], "note": "When reporting or solvency becomes a problem, auditors and external administrators become central（财报/偿债出问题时进入审计和破产程序）."}, {"id": "n7", "label": "Exam method（答题方法）", "children": [{"id": "n4", "label": "Identify the legal relationship first（先识别法律关系）", "children": [], "note": "Ask whether the facts involve sole trader, partnership, company, director, officer, member, auditor, creditor or external administrator（先定位角色）."}, {"id": "n5", "label": "State the rule with section/case（写规则并配合条文/案例）", "children": [], "note": "Use Corporations Act sections and leading cases as anchors, then apply facts to each element（条文案例是框架）."}, {"id": "n6", "label": "Compare consequences（比较法律后果）", "children": [], "note": "Focus on separate legal personality, limited liability, duties, remedies, moratoriums and liquidation outcomes（比较责任、救济和程序后果）."}]}]}, {"id": "n150", "label": "Topic 08 - Business Organisation and Corporate Regulation（商业组织与公司监管）", "children": [{"id": "n15", "label": "Choosing a business structure（选择商业结构）", "children": [{"id": "n9", "label": "Size and capital needs（规模与资金）", "children": []}, {"id": "n10", "label": "Ease and cost of establishment（设立难度与成本）", "children": []}, {"id": "n11", "label": "Management and control（管理与控制权）", "children": []}, {"id": "n12", "label": "Risk and liability exposure（风险与责任）", "children": []}, {"id": "n13", "label": "Taxation, regulation and lifespan（税务、监管与存续期）", "children": []}, {"id": "n14", "label": "Type of business and growth plan（业务类型与扩张计划）", "children": []}], "note": "The same criteria recur at the end of Topic 08: size, capital, regulation, control, liability, business type and lifespan（反复用这些因素比较）."}, {"id": "n27", "label": "Sole trader（个体经营者）", "children": [{"id": "n18", "label": "Definition（定义）", "children": [{"id": "n16", "label": "Individual natural person owns the business as principal（自然人作为本人经营）", "children": []}, {"id": "n17", "label": "No separate business entity（业务不独立成法律实体）", "children": []}]}, {"id": "n22", "label": "Regulation（监管）", "children": [{"id": "n19", "label": "No distinct sole-trader code（没有独立成套规则）", "children": []}, {"id": "n20", "label": "General business laws still apply（一般商业法规仍适用）", "children": []}, {"id": "n21", "label": "Business Names Registration Act 2011 (Cth) if trading name used（使用商号需注册）", "children": []}]}, {"id": "n26", "label": "Legal consequences（法律后果）", "children": [{"id": "n23", "label": "Unlimited personal liability（无限个人责任）", "children": []}, {"id": "n24", "label": "Personal taxation（个人税务）", "children": []}, {"id": "n25", "label": "Limited lifespan tied to owner（存续依赖经营者）", "children": []}]}]}, {"id": "n47", "label": "Partnerships（合伙）", "children": [{"id": "n32", "label": "Statutory definition - Partnership Act 1891 (SA) s 1（法定定义）", "children": [{"id": "n28", "label": "Relation between persons（多人之间关系）", "children": []}, {"id": "n29", "label": "Carrying on a business（经营业务）", "children": []}, {"id": "n30", "label": "In common（共同经营）", "children": []}, {"id": "n31", "label": "With a view to profit（以营利为目的）", "children": []}], "note": "All four elements should be checked before calling something a partnership（四要素逐一适用事实）."}, {"id": "n37", "label": "Formation（成立方式）", "children": [{"id": "n33", "label": "Agreement, formal or informal（协议，可正式或非正式）", "children": []}, {"id": "n34", "label": "Conduct showing partnership（行为可证明合伙）", "children": []}, {"id": "n35", "label": "Estoppel where parties hold out partnership（禁止反言/表见合伙）", "children": []}, {"id": "n36", "label": "Regulatory requirements and business names（登记与商号要求）", "children": []}]}, {"id": "n43", "label": "Legal consequences（法律后果）", "children": [{"id": "n38", "label": "Firm label for litigation and contracts（可用firm名义诉讼/订约）", "children": []}, {"id": "n39", "label": "Usually not separate legal entity（通常不是独立法人）", "children": []}, {"id": "n40", "label": "Partners are agents of each other（合伙人互为代理）", "children": []}, {"id": "n41", "label": "Unlimited liability（无限责任）", "children": []}, {"id": "n42", "label": "No perpetual existence（无永久存续）", "children": []}], "note": "Partnership risk is agency plus unlimited liability: one partner can expose the others（代理关系会放大责任）."}, {"id": "n46", "label": "Corporate overlap（公司法交叉）", "children": [{"id": "n44", "label": "Corporations Act 2001 (Cth) s 115 limits large partnerships（大型合伙限制）", "children": []}, {"id": "n45", "label": "General business regulation still applies（一般商业监管仍适用）", "children": []}]}]}, {"id": "n62", "label": "Joint ventures（合营/联合项目）", "children": [{"id": "n51", "label": "Definition（定义）", "children": [{"id": "n48", "label": "Contractual arrangement for a combined project or venture（合同安排下的共同项目）", "children": []}, {"id": "n49", "label": "Parties share resulting products rather than operate one common business（分享成果而非共同经营一个业务）", "children": []}, {"id": "n50", "label": "Venturers remain independent operators（各方保持独立）", "children": []}]}, {"id": "n56", "label": "Key characteristics（关键特征）", "children": [{"id": "n52", "label": "Separate asset ownership（资产分别拥有）", "children": []}, {"id": "n53", "label": "Little common property or mutuality（共同财产和互相性较弱）", "children": []}, {"id": "n54", "label": "Relationship mainly governed by contract（主要由合同规制）", "children": []}, {"id": "n55", "label": "Not necessarily agents for each other（不必然互为代理）", "children": []}]}, {"id": "n61", "label": "Distinguish from partnership（与合伙区分）", "children": [{"id": "n57", "label": "Usually one-off or project-based（通常一次性/项目型）", "children": []}, {"id": "n58", "label": "Share in venture may be transferable（权益可能可转让）", "children": []}, {"id": "n59", "label": "Each venturer responsible for own debts（各自承担自身债务）", "children": []}, {"id": "n60", "label": "Fiduciary obligations are more limited（信义义务较有限）", "children": []}], "note": "The practical exam issue is whether the facts show partnership agency/liability or a narrower contractual joint venture（关键是避免误判为合伙）."}]}, {"id": "n86", "label": "Trusts and business trusts（信托与商业信托）", "children": [{"id": "n65", "label": "Trust definition（信托定义）", "children": [{"id": "n63", "label": "Obligation imposed on trustee to hold property（受托人持有财产的义务）", "children": []}, {"id": "n64", "label": "Property held for beneficiaries（为受益人利益持有）", "children": []}]}, {"id": "n70", "label": "Essential elements（基本要素）", "children": [{"id": "n66", "label": "Settlor（设立人）", "children": []}, {"id": "n67", "label": "Trust property（信托财产）", "children": []}, {"id": "n68", "label": "Trustee（受托人）", "children": []}, {"id": "n69", "label": "Beneficiary（受益人）", "children": []}]}, {"id": "n75", "label": "Types（类型）", "children": [{"id": "n71", "label": "Express trust（明示信托）", "children": []}, {"id": "n72", "label": "Fixed and unit trusts（固定/单位信托）", "children": []}, {"id": "n73", "label": "Discretionary trusts（酌定信托）", "children": []}, {"id": "n74", "label": "Resulting and constructive trusts（返还/构成信托）", "children": []}]}, {"id": "n80", "label": "Regulation（监管）", "children": [{"id": "n76", "label": "Equitable principles（衡平法原则）", "children": []}, {"id": "n77", "label": "Trustee Act 1936 (SA)（南澳受托人法）", "children": []}, {"id": "n78", "label": "Trust deed（信托契约）", "children": []}, {"id": "n79", "label": "Corporations Act may apply to corporate trustee（公司受托人触发公司法）", "children": []}]}, {"id": "n85", "label": "Trading trust（经营信托）", "children": [{"id": "n81", "label": "Business assets placed in a trust（业务资产放入信托）", "children": []}, {"id": "n82", "label": "Often uses a corporate trustee（常配合公司受托人）", "children": []}, {"id": "n83", "label": "Potential tax benefits（潜在税务优势）", "children": []}, {"id": "n84", "label": "Limited liability through corporate trustee（借公司受托人限制责任）", "children": []}]}]}, {"id": "n100", "label": "Associations（社团/协会）", "children": [{"id": "n89", "label": "Definition（定义）", "children": [{"id": "n87", "label": "Two or more persons forming social or cultural organisation（两人以上组成社交/文化组织）", "children": []}, {"id": "n88", "label": "No profit distribution among members（不向成员分配利润）", "children": []}]}, {"id": "n94", "label": "Unincorporated association（非法人社团）", "children": [{"id": "n90", "label": "Typical clubs or societies（常见俱乐部/社团）", "children": []}, {"id": "n91", "label": "No separate legal personality（无法人格）", "children": []}, {"id": "n92", "label": "Uncertainty about liability for debts（债务责任不确定）", "children": []}, {"id": "n93", "label": "Bradley Egg Farm v Clifford（责任问题案例）", "children": []}]}, {"id": "n99", "label": "Incorporated association（法人社团）", "children": [{"id": "n95", "label": "Registered under Associations Incorporation Act 1985 (SA)（依据州法登记）", "children": []}, {"id": "n96", "label": "Separate legal entity（独立法律实体）", "children": []}, {"id": "n97", "label": "Limited liability（有限责任）", "children": []}, {"id": "n98", "label": "Uses “Inc” after name（名称后加 Inc）", "children": []}]}]}, {"id": "n130", "label": "Companies（公司）", "children": [{"id": "n106", "label": "Core characteristics（核心特征）", "children": [{"id": "n101", "label": "Separate legal entity（独立法人格）", "children": []}, {"id": "n102", "label": "Limited liability（有限责任）", "children": []}, {"id": "n103", "label": "Perpetual succession（永久存续）", "children": []}, {"id": "n104", "label": "Free transferability of interests（权益可转让）", "children": []}, {"id": "n105", "label": "More than 20 members generally need company form - s 115（超过20人通常需公司形式）", "children": []}]}, {"id": "n110", "label": "Salomon principle（Salomon 独立法人原则）", "children": [{"id": "n107", "label": "Company validly formed is separate from shareholders（依法成立后与股东分离）", "children": []}, {"id": "n108", "label": "Controller/shareholder is not automatically liable for company debts（控制人/股东不自动承担公司债）", "children": []}, {"id": "n109", "label": "Family ownership or one-person control does not itself remove separation（家族/一人控制本身不否定独立性）", "children": []}], "note": "Salomon v Salomon is the anchor case for separate legal personality and limited liability（公司人格独立的核心案例）."}, {"id": "n122", "label": "Types of companies（公司类型）", "children": [{"id": "n111", "label": "Company limited by shares（股份有限公司）", "children": []}, {"id": "n112", "label": "Company limited by guarantee（保证有限公司）", "children": []}, {"id": "n113", "label": "No liability company（无责任公司，特定矿业语境）", "children": []}, {"id": "n117", "label": "Proprietary company（私人公司）", "children": [{"id": "n114", "label": "1-50 shareholders - ss 113, 114（1至50名股东）", "children": []}, {"id": "n115", "label": "Minimum 1 director, 1 resident（至少一名董事且一名澳洲居民）", "children": []}, {"id": "n116", "label": "Limited fundraising restrictions（公开融资受限）", "children": []}]}, {"id": "n121", "label": "Public company（公众公司）", "children": [{"id": "n118", "label": "1 to unlimited shareholders（股东数可无限）", "children": []}, {"id": "n119", "label": "Minimum 3 directors, 2 resident（至少三名董事且两名澳洲居民）", "children": []}, {"id": "n120", "label": "Listed or unlisted（上市或非上市）", "children": []}]}]}, {"id": "n129", "label": "Registration and internal rules（注册与内部规则）", "children": [{"id": "n123", "label": "Company name cannot already be registered（名称不能重复）", "children": []}, {"id": "n124", "label": "Registration under Corporations Act s 117（公司法 s117 注册）", "children": []}, {"id": "n125", "label": "Director ID required（董事识别号）", "children": []}, {"id": "n126", "label": "Replaceable rules in s 141 if no constitution（无章程时适用可替代规则）", "children": []}, {"id": "n127", "label": "Constitution can replace/modify default rules（章程可修改默认规则）", "children": []}, {"id": "n128", "label": "Business name registration if trading under different name（用不同商号经营需注册）", "children": []}]}]}, {"id": "n149", "label": "Corporations Act and ASIC（公司法与ASIC）", "children": [{"id": "n134", "label": "Historical development（历史发展）", "children": [{"id": "n131", "label": "Chartered corporations and joint stock origins（特许公司与股份起源）", "children": []}, {"id": "n132", "label": "Australian constitutional and federal developments（澳洲宪制与联邦发展）", "children": []}, {"id": "n133", "label": "Modern reforms: insolvency, crowd-sourced funding, penalties, phoenixing, whistleblowing（现代改革）", "children": []}]}, {"id": "n138", "label": "Regulatory framework（监管框架）", "children": [{"id": "n135", "label": "Corporations Act 2001 (Cth)（公司法）", "children": []}, {"id": "n136", "label": "ASIC Act 2001 (Cth)（ASIC法）", "children": []}, {"id": "n137", "label": "ASIC, ASX, ATO and AUSTRAC as regulators（主要监管机构）", "children": []}]}, {"id": "n143", "label": "ASIC role and functions（ASIC角色）", "children": [{"id": "n139", "label": "Corporate watchdog（公司监管看门人）", "children": []}, {"id": "n140", "label": "Administers and regulates companies（管理并监管公司）", "children": []}, {"id": "n141", "label": "Law reform and education functions（法律改革与教育）", "children": []}, {"id": "n142", "label": "Independent but accountable to minister/parliament（独立但受部长和议会监督）", "children": []}]}, {"id": "n148", "label": "ASIC powers（ASIC权力）", "children": [{"id": "n144", "label": "Exemption power and regulatory guides（豁免权与监管指南）", "children": []}, {"id": "n145", "label": "Investigation and information gathering - ASIC Act ss 13, 14, 19-27（调查与取证）", "children": []}, {"id": "n146", "label": "Examinations and production powers（询问和文件提交）", "children": []}, {"id": "n147", "label": "Enforcement: criminal/civil proceedings, undertakings, infringement notices, bannings（执行措施）", "children": []}]}]}]}, {"id": "n336", "label": "Topic 09 - Governance, Directors Duties and Member Remedies（治理、董事义务与成员救济）", "children": [{"id": "n183", "label": "Directors and officers（董事与高级管理人员）", "children": [{"id": "n154", "label": "Who is a director? - Corporations Act s 9（谁是董事）", "children": [{"id": "n151", "label": "Validly appointed director or alternate director（正式任命董事/替任董事）", "children": []}, {"id": "n152", "label": "De facto director: acts in position though not validly appointed（事实董事）", "children": []}, {"id": "n153", "label": "Shadow director: board accustomed to follow instructions/wishes（影子董事）", "children": []}], "note": "Do not rely only on job title. Look at actual conduct, influence and how the company/third parties treated the person（看实质不是头衔）."}, {"id": "n160", "label": "De facto director factors（事实董事因素）", "children": [{"id": "n155", "label": "Assumed responsibility to act as director（承担董事职责）", "children": []}, {"id": "n156", "label": "Corporate governance position and actual activities（治理结构位置与实际行为）", "children": []}, {"id": "n157", "label": "Company held person out as director（公司对外表现）", "children": []}, {"id": "n158", "label": "Participation in board decisions（参与董事决策）", "children": []}, {"id": "n159", "label": "Re ACN 092 745 330（因素清单案例）", "children": []}]}, {"id": "n166", "label": "Shadow director principles（影子董事原则）", "children": [{"id": "n161", "label": "Source of influence over board members（对董事会有实际影响）", "children": []}, {"id": "n162", "label": "Professional advice alone is excluded（单纯专业建议不算）", "children": []}, {"id": "n163", "label": "Large secured creditor protecting own interests usually not enough（银行保护自身利益通常不够）", "children": []}, {"id": "n164", "label": "Holding company may be shadow director of subsidiary（母公司可能成为子公司影子董事）", "children": []}, {"id": "n165", "label": "Re Akron Roads; Standard Chartered Bank v Antico（关键案例）", "children": []}]}, {"id": "n171", "label": "Types of directors（董事类型）", "children": [{"id": "n167", "label": "Managing director and chair（董事总经理与董事长）", "children": []}, {"id": "n168", "label": "Executive and non-executive directors（执行/非执行董事）", "children": []}, {"id": "n169", "label": "Independent and nominee directors（独立/提名董事）", "children": []}, {"id": "n170", "label": "Alternate directors（替任董事）", "children": []}]}, {"id": "n176", "label": "Qualifications, appointment and exit（资格、任命与离任）", "children": [{"id": "n172", "label": "Individual, at least 18, consents - ss 201B, 201D（自然人、18岁、同意）", "children": []}, {"id": "n173", "label": "Not disqualified - ss 206A-206C（不得被取消资格）", "children": []}, {"id": "n174", "label": "Founding directors or appointment by members/directors - ss 201G-201K（任命方式）", "children": []}, {"id": "n175", "label": "Removal/resignation/disqualification - ss 203A, 203C, 203D, 206A（离任方式）", "children": []}]}, {"id": "n182", "label": "Officers, company secretary and senior managers（officer、公司秘书与高管）", "children": [{"id": "n177", "label": "Officer includes director or company secretary - s 9（officer包括董事/秘书）", "children": []}, {"id": "n178", "label": "Person participating in substantial business decisions（参与重大业务决策者）", "children": []}, {"id": "n179", "label": "Person able to significantly affect financial standing（能显著影响财务状况者）", "children": []}, {"id": "n180", "label": "ASIC v King: formal office not required（无需正式职位也可为officer）", "children": []}, {"id": "n181", "label": "Company secretary handles compliance filings and registered office matters（公司秘书处理合规事项）", "children": []}]}]}, {"id": "n195", "label": "Directors duties framework（董事义务框架）", "children": [{"id": "n187", "label": "General law foundation（普通法/衡平法基础）", "children": [{"id": "n184", "label": "Fiduciary relationship with company（对公司负信义义务）", "children": []}, {"id": "n185", "label": "Hospital Products explains high loyalty standard（忠诚义务高度标准）", "children": []}, {"id": "n186", "label": "Care and diligence also arise at general law（注意与勤勉义务）", "children": []}]}, {"id": "n194", "label": "Statutory form（成文法形式）", "children": [{"id": "n188", "label": "s 180 care and diligence（注意与勤勉）", "children": []}, {"id": "n189", "label": "s 181 good faith and proper purpose（善意与正当目的）", "children": []}, {"id": "n190", "label": "s 182 misuse of position（不当利用职位）", "children": []}, {"id": "n191", "label": "s 183 misuse of information（不当利用信息）", "children": []}, {"id": "n192", "label": "s 184 criminal offences for dishonest/reckless conduct（刑事责任）", "children": []}, {"id": "n193", "label": "s 185 statutory duties operate alongside general law（不排除普通法/衡平法）", "children": []}], "note": "Treat ss 180-184 as statutory anchors, but remember s 185 preserves general law duties（条文和普通法并行）."}]}, {"id": "n216", "label": "Good faith and proper purpose - s 181（善意与正当目的）", "children": [{"id": "n200", "label": "Good faith in best interests of corporation（为公司最佳利益善意行事）", "children": [{"id": "n196", "label": "Subjective/objective tension in cases（主客观标准有争议）", "children": []}, {"id": "n197", "label": "Company usually means general body of shareholders（通常指股东整体）", "children": []}, {"id": "n198", "label": "Greenhalgh v Arderne Cinemas（公司利益/股东整体）", "children": []}, {"id": "n199", "label": "Nominee directors must still consider company interests（提名董事仍需考虑本公司利益）", "children": []}]}, {"id": "n205", "label": "Whose interests count?（谁的利益）", "children": [{"id": "n201", "label": "Individual shareholders: generally no direct duty（通常不对个别股东负义务）", "children": []}, {"id": "n202", "label": "Employees: no priority over shareholder interests（员工利益通常不优先）", "children": []}, {"id": "n203", "label": "Creditors: become important near insolvency（接近破产时债权人利益重要）", "children": []}, {"id": "n204", "label": "Society/ESG may influence but does not replace statutory test（ESG可相关但不替代测试）", "children": []}]}, {"id": "n209", "label": "Wholly-owned subsidiary - s 187（全资子公司）", "children": [{"id": "n206", "label": "Constitution must expressly authorise parent-company interest（章程授权考虑母公司利益）", "children": []}, {"id": "n207", "label": "Director must act in good faith（仍需善意）", "children": []}, {"id": "n208", "label": "Subsidiary must not be insolvent or become insolvent（不得导致无力偿债）", "children": []}]}, {"id": "n215", "label": "Proper purpose（正当目的）", "children": [{"id": "n210", "label": "Identify purpose of the power（先识别权力目的）", "children": []}, {"id": "n211", "label": "Find director’s actual purpose as fact（再查实际目的）", "children": []}, {"id": "n212", "label": "Howard Smith v Ampol two-step test（两步测试）", "children": []}, {"id": "n213", "label": "Mixed purposes use dominant/but-for analysis - Whitehouse（混合目的看主导目的）", "children": []}, {"id": "n214", "label": "Permanent Building Society v Wheeler summary principles（原则总结）", "children": []}], "note": "For share issues or voting-control facts, proper purpose is often the decisive issue（发行股份/控制权题常考）."}]}, {"id": "n239", "label": "Avoid conflicts, no profit and disclosure（避免利益冲突、不得获利与披露）", "children": [{"id": "n220", "label": "General fiduciary conflict rule（一般信义冲突规则）", "children": [{"id": "n217", "label": "Avoid direct and indirect conflicts（避免直接/间接冲突）", "children": []}, {"id": "n218", "label": "Aberdeen Railway v Blaikie Bros（无冲突原则）", "children": []}, {"id": "n219", "label": "Transvaal Lands extends wide conflict approach（冲突范围较广）", "children": []}]}, {"id": "n224", "label": "Informed consent（知情同意）", "children": [{"id": "n221", "label": "Consent can authorise conflicted transaction if fully informed（充分披露后可同意）", "children": []}, {"id": "n222", "label": "North-West Transportation v Beatty（同意作用）", "children": []}, {"id": "n223", "label": "Furs Ltd v Tomkies: disclose all material facts（披露所有重大事实）", "children": []}]}, {"id": "n229", "label": "Corporate opportunities and property（公司机会与财产）", "children": [{"id": "n225", "label": "Diversion of business opportunities prohibited（不得转移公司机会）", "children": []}, {"id": "n226", "label": "Green v Bestobell; IDC v Cooley（机会挪用案例）", "children": []}, {"id": "n227", "label": "Misappropriation of company property prohibited（不得挪用公司财产）", "children": []}, {"id": "n228", "label": "Wollongong Coal Ltd v Gujarat NRE（公司财产/机会）", "children": []}]}, {"id": "n233", "label": "Statutory misuse provisions（成文法不当利用）", "children": [{"id": "n230", "label": "s 182 misuse position for advantage or detriment（不当利用职位）", "children": []}, {"id": "n231", "label": "s 183 misuse information（不当利用信息）", "children": []}, {"id": "n232", "label": "Applies to directors, officers and employees（适用范围更广）", "children": []}]}, {"id": "n238", "label": "Material personal interest disclosure（重大个人利益披露）", "children": [{"id": "n234", "label": "s 191 notice to other directors（通知其他董事）", "children": []}, {"id": "n235", "label": "s 192 standing notice option（常设通知）", "children": []}, {"id": "n236", "label": "s 193 adds to general law and constitution（不削弱普通法/章程限制）", "children": []}, {"id": "n237", "label": "s 194 proprietary company replaceable rule on voting/proceeding（私人公司可替代规则）", "children": []}]}]}, {"id": "n265", "label": "Care and diligence - s 180（注意与勤勉义务）", "children": [{"id": "n243", "label": "Modern standard（现代标准）", "children": [{"id": "n240", "label": "Daniels v Anderson: not merely subjective（不只看个人主观能力）", "children": []}, {"id": "n241", "label": "Reasonable person in corporation circumstances（客观合理人标准）", "children": []}, {"id": "n242", "label": "Office and responsibilities matter（职位与职责相关）", "children": []}]}, {"id": "n248", "label": "Required standard factors（判断标准因素）", "children": [{"id": "n244", "label": "Magnitude and probability of harm（损害大小与发生概率）", "children": []}, {"id": "n245", "label": "Seriousness of loss（损失严重性）", "children": []}, {"id": "n246", "label": "Benefits expected from conduct（行为预期收益）", "children": []}, {"id": "n247", "label": "ASIC v Vines factors（Vines因素）", "children": []}]}, {"id": "n253", "label": "Non-executive and specialist directors（非执行/专业董事）", "children": [{"id": "n249", "label": "Non-executive directors still monitor diligently（非执行董事仍需监督）", "children": []}, {"id": "n250", "label": "Special skills/responsibilities may raise expectations（专业技能可提高标准）", "children": []}, {"id": "n251", "label": "Must understand financial affairs and reports（需理解财务状况）", "children": []}, {"id": "n252", "label": "ASIC v Healy: take diligent and intelligent interest（Healy财报案）", "children": []}]}, {"id": "n256", "label": "Causation and liability（因果关系与责任）", "children": [{"id": "n254", "label": "Breach of standard alone does not automatically create liability（违反标准不自动等于赔偿）", "children": []}, {"id": "n255", "label": "Company must show loss caused by breach（需证明违约导致损失）", "children": []}]}, {"id": "n264", "label": "Defences and protections（抗辩/保护）", "children": [{"id": "n261", "label": "Business judgment rule - s 180(2)（商业判断规则）", "children": [{"id": "n257", "label": "Business judgment made in good faith for proper purpose（善意且正当目的）", "children": []}, {"id": "n258", "label": "No material personal interest（无重大个人利益）", "children": []}, {"id": "n259", "label": "Appropriately informed（适当知情）", "children": []}, {"id": "n260", "label": "Rational belief judgment is in company interests（合理相信符合公司利益）", "children": []}]}, {"id": "n262", "label": "Reasonable reliance - s 189（合理依赖他人）", "children": []}, {"id": "n263", "label": "Delegation - s 190 and ASIC v Adler（授权委托与合理性）", "children": []}]}]}, {"id": "n287", "label": "Insolvent trading and creditor interests（无力偿债交易与债权人利益）", "children": [{"id": "n268", "label": "Creditor interests near insolvency（接近破产时债权人利益）", "children": [{"id": "n266", "label": "Walker v Wimborne: consider each company and creditors（集团内也要分别考虑）", "children": []}, {"id": "n267", "label": "Creditors become central when company is insolvent or near insolvent（财困时债权人利益上升）", "children": []}]}, {"id": "n273", "label": "s 588G duty to prevent insolvent trading（防止无力偿债交易）", "children": [{"id": "n269", "label": "Person is director when company incurs debt（发生债务时为董事）", "children": []}, {"id": "n270", "label": "Company insolvent or becomes insolvent by incurring debt（公司已无力偿债或因此无力偿债）", "children": []}, {"id": "n271", "label": "Reasonable grounds for suspecting insolvency（有合理理由怀疑无力偿债）", "children": []}, {"id": "n272", "label": "Director aware or reasonable person would be aware（董事知道或合理人应知）", "children": []}]}, {"id": "n276", "label": "Debt timing and suspicion indicators（债务时间与怀疑指标）", "children": [{"id": "n274", "label": "Deemed debts under s 588G(1A)（视为债务）", "children": []}, {"id": "n275", "label": "Plymin factors: continuing losses, overdue taxes, poor records etc（Plymin指标）", "children": []}]}, {"id": "n282", "label": "Safe harbour and defences（安全港与抗辩）", "children": [{"id": "n277", "label": "s 588GA: developing course reasonably likely to lead to better outcome（合理可能带来更好结果的重整方案）", "children": []}, {"id": "n278", "label": "s 588H(2) reasonable expectation of solvency（合理预期有偿债能力）", "children": []}, {"id": "n279", "label": "s 588H(3) reasonable reliance on competent person（合理依赖有能力人士）", "children": []}, {"id": "n280", "label": "s 588H(4) absence from management（未参与管理）", "children": []}, {"id": "n281", "label": "s 588H(5) reasonable steps to prevent debt（采取合理步骤防止债务）", "children": []}]}, {"id": "n286", "label": "Consequences（后果）", "children": [{"id": "n283", "label": "Civil penalty - s 588G(2)（民事罚则）", "children": []}, {"id": "n284", "label": "Criminal liability if dishonest - s 588G(3)（不诚实时刑责）", "children": []}, {"id": "n285", "label": "Liquidator may recover compensation from director（清算人可追偿）", "children": []}]}]}, {"id": "n296", "label": "Member rights and constitution（成员权利与章程）", "children": [{"id": "n291", "label": "Alteration of constitution（修改章程）", "children": [{"id": "n288", "label": "Special resolution generally required（通常需特别决议）", "children": []}, {"id": "n289", "label": "Expropriation of property rights tested strictly（剥夺财产权严格审查）", "children": []}, {"id": "n290", "label": "Gambotto v WCP: valid only if proper purpose and fair（正当目的且公平）", "children": []}]}, {"id": "n295", "label": "Statutory contract - s 140（法定合同）", "children": [{"id": "n292", "label": "Company and members（公司与成员之间）", "children": []}, {"id": "n293", "label": "Company and directors/secretary（公司与董事/秘书之间）", "children": []}, {"id": "n294", "label": "Members among themselves（成员相互之间）", "children": []}], "note": "s 140 turns the constitution into a statutory contract, but only for rights in the relevant capacity（章程合同只保护相关身份权利）."}]}, {"id": "n313", "label": "Statutory derivative action（法定派生诉讼）", "children": [{"id": "n299", "label": "Framework - Part 2F.1A（框架）", "children": [{"id": "n297", "label": "Proceedings brought on behalf of company（代表公司起诉）", "children": []}, {"id": "n298", "label": "Used where company will not sue（公司自己不愿起诉时）", "children": []}]}, {"id": "n302", "label": "Standing - s 236（申请资格）", "children": [{"id": "n300", "label": "Member, former member or person entitled to be registered（成员/前成员/有权登记者）", "children": []}, {"id": "n301", "label": "Director/officer or former director/officer（董事/officer或前任）", "children": []}]}, {"id": "n308", "label": "Leave requirements - s 237(2)（许可条件）", "children": [{"id": "n303", "label": "Company probably will not bring proceedings（公司可能不会起诉）", "children": []}, {"id": "n304", "label": "Applicant acts in good faith（申请人善意）", "children": []}, {"id": "n305", "label": "Best interests of company（符合公司最佳利益）", "children": []}, {"id": "n306", "label": "Serious question to be tried（有可审理的重要问题）", "children": []}, {"id": "n307", "label": "Notice requirements met or appropriate to dispense（通知要求）", "children": []}]}, {"id": "n312", "label": "Court powers and ratification（法院权力与追认）", "children": [{"id": "n309", "label": "s 241 active management and investigation orders（法院管理/调查命令）", "children": []}, {"id": "n310", "label": "s 242 costs orders（费用命令）", "children": []}, {"id": "n311", "label": "s 239 ratification does not automatically bar leave（成员追认不自动阻止）", "children": []}]}]}, {"id": "n335", "label": "Other member remedies（其他成员救济）", "children": [{"id": "n316", "label": "Statutory injunction - s 1324（法定禁令）", "children": [{"id": "n314", "label": "Contravention, current conduct or proposed contravention（过去/正在/拟违反公司法）", "children": []}, {"id": "n315", "label": "Court may restrain or require conduct（法院可禁止或强制行为）", "children": []}]}, {"id": "n322", "label": "Oppression remedy（压迫救济）", "children": [{"id": "n317", "label": "Standing - s 234（申请资格）", "children": []}, {"id": "n318", "label": "Grounds - s 232 oppressive, unfairly prejudicial or unfairly discriminatory（压迫/不公平损害/不公平歧视）", "children": []}, {"id": "n319", "label": "Examples: refusal of dividends, exclusion from management, misuse of profits（拒发股息、排挤管理、滥用利润）", "children": []}, {"id": "n320", "label": "Relief - s 233 any appropriate order（法院可作适当命令）", "children": []}, {"id": "n321", "label": "Possible orders: winding up, share purchase, constitution changes, injunctions（可清算、买股、改章程、禁令）", "children": []}], "note": "Oppression is usually the most flexible minority shareholder remedy（小股东救济中最灵活）."}, {"id": "n329", "label": "Winding up as remedy（清算救济）", "children": [{"id": "n323", "label": "s 461(1)(e): directors acting in own interests（董事为自身利益行事）", "children": []}, {"id": "n324", "label": "s 461(1)(f)-(g): unfair/oppressive grounds（不公平/压迫类理由）", "children": []}, {"id": "n325", "label": "Just and equitable ground（公平正义清算）", "children": []}, {"id": "n326", "label": "Loch v John Blackwood; Re Wondoflex（信任破裂/管理问题案例）", "children": []}, {"id": "n327", "label": "s 462 standing（谁可申请）", "children": []}, {"id": "n328", "label": "s 467(4): court considers other remedy before winding up（清算前考虑其他救济）", "children": []}]}, {"id": "n334", "label": "Information and class rights（信息权与类别权利）", "children": [{"id": "n330", "label": "s 247A court-ordered inspection of books（法院准许查阅账簿）", "children": []}, {"id": "n331", "label": "s 247D replaceable rule for inspection（可替代规则）", "children": []}, {"id": "n332", "label": "s 173 register access for limited purposes（成员名册查阅有限制）", "children": []}, {"id": "n333", "label": "ss 246B-246D variation/cancellation of class rights（类别权利变更）", "children": []}]}]}]}, {"id": "n503", "label": "Topic 10 - Auditors Duties and External Administration（审计师义务与外部管理）", "children": [{"id": "n366", "label": "Auditors（审计师）", "children": [{"id": "n341", "label": "Purpose and appointment（目的与任命）", "children": [{"id": "n337", "label": "Independent assessment of financial position（独立评估财务状况）", "children": []}, {"id": "n338", "label": "Ensure compliance with external reporting requirements（确保外部报告合规）", "children": []}, {"id": "n339", "label": "Public companies - ss 327A-327G（公众公司任命）", "children": []}, {"id": "n340", "label": "Proprietary companies - s 325（私人公司任命）", "children": []}]}, {"id": "n345", "label": "Who can be auditor?（谁可任审计师）", "children": [{"id": "n342", "label": "Registered company auditor, partnership or company - s 1280(2A)（注册公司审计师）", "children": []}, {"id": "n343", "label": "Independence requirements（独立性要求）", "children": []}, {"id": "n344", "label": "Audit rotation - ss 324DA-324DD（审计轮换）", "children": []}]}, {"id": "n351", "label": "Tenure ends（任期终止）", "children": [{"id": "n346", "label": "Death（死亡）", "children": []}, {"id": "n347", "label": "Removal by members - s 329（成员罢免）", "children": []}, {"id": "n348", "label": "Resignation（辞任）", "children": []}, {"id": "n349", "label": "Loss of qualification - s 324（资格丧失）", "children": []}, {"id": "n350", "label": "Winding up（公司清算）", "children": []}]}, {"id": "n356", "label": "Statutory duties - ss 308-313（成文法义务）", "children": [{"id": "n352", "label": "Form opinion on financial report compliance（形成财报合规意见）", "children": []}, {"id": "n353", "label": "Comply with auditing standards（遵守审计准则）", "children": []}, {"id": "n354", "label": "Report to members（向成员报告）", "children": []}, {"id": "n355", "label": "Report to ASIC where required（必要时向ASIC报告）", "children": []}]}, {"id": "n361", "label": "General law duty（普通法义务）", "children": [{"id": "n357", "label": "Reasonable care and skill（合理注意与技能）", "children": []}, {"id": "n358", "label": "Daniels v Anderson（审计注意义务）", "children": []}, {"id": "n359", "label": "Not a guarantee of account correctness（不保证账目绝对正确）", "children": []}, {"id": "n360", "label": "Kingston Cotton Mill: watchdog not bloodhound（看门狗不是侦探犬）", "children": []}]}, {"id": "n365", "label": "Duty to third parties - Esanda（对第三人义务）", "children": [{"id": "n362", "label": "Auditor knew/ought to know report would be communicated to third party or class（知道报告会传给特定第三人/类别）", "children": []}, {"id": "n363", "label": "Communication for transaction purpose very likely to occur（用于交易目的的传播高度可能）", "children": []}, {"id": "n364", "label": "Third party reliance and economic loss very likely（依赖并发生经济损失高度可能）", "children": []}], "note": "For third-party negligence claims, Esanda makes proximity/reliance highly fact-specific（第三人索赔门槛高）."}]}, {"id": "n379", "label": "External administration map（外部管理地图）", "children": [{"id": "n370", "label": "Secured creditor route（有担保债权人路径）", "children": [{"id": "n367", "label": "Mortgagee in possession（抵押权人占有）", "children": []}, {"id": "n368", "label": "Receivership（接管）", "children": []}, {"id": "n369", "label": "Some secured creditors may appoint administrator - s 436C（部分担保债权人可任命管理人）", "children": []}]}, {"id": "n375", "label": "Restructuring alternatives（重整替代方案）", "children": [{"id": "n371", "label": "Informal workouts（非正式重组）", "children": []}, {"id": "n372", "label": "Schemes of arrangement - Pt 5.1（安排方案）", "children": []}, {"id": "n373", "label": "Voluntary administration - Pt 5.3A（自愿管理）", "children": []}, {"id": "n374", "label": "Small business restructuring（小企业重组）", "children": []}]}, {"id": "n378", "label": "Terminal process（终局程序）", "children": [{"id": "n376", "label": "Winding up/liquidation（清算）", "children": []}, {"id": "n377", "label": "Simplified liquidation for eligible small companies（符合条件小公司简化清算）", "children": []}]}], "note": "External administration is best learned as a decision tree: secured enforcement, rescue/restructure, then liquidation（按路径记忆）."}, {"id": "n404", "label": "Receivership and mortgagee in possession（接管与抵押权人占有）", "children": [{"id": "n383", "label": "Receiver appointment（接管人任命）", "children": [{"id": "n380", "label": "Private appointment under security agreement（依据担保协议私人任命）", "children": []}, {"id": "n381", "label": "Court appointment（法院任命）", "children": []}, {"id": "n382", "label": "Qualifications - s 418（资格要求）", "children": []}]}, {"id": "n389", "label": "Receiver role and duties（角色与义务）", "children": [{"id": "n384", "label": "Realise secured property for secured creditor（为担保债权人实现担保财产）", "children": []}, {"id": "n385", "label": "Equitable duties - Expo International v Chant（衡平义务）", "children": []}, {"id": "n386", "label": "s 420A reasonable care to sell at market value or best obtainable price（出售时合理注意）", "children": []}, {"id": "n387", "label": "Subject to directors/officers duties ss 180-183（也受董事/officer义务约束）", "children": []}, {"id": "n388", "label": "Specific statutory duties ss 421-422, 427-429, 432（其他特定义务）", "children": []}]}, {"id": "n392", "label": "Personal liability（个人责任）", "children": [{"id": "n390", "label": "s 419(1) liability for debts incurred during receivership/control（接管期间发生债务责任）", "children": []}, {"id": "n391", "label": "s 419A pre-existing property agreements（既有财产协议责任）", "children": []}]}, {"id": "n397", "label": "Impact of appointment（任命影响）", "children": [{"id": "n393", "label": "Directors retain office but powers over controlled assets reduced（董事仍在任但权力受限）", "children": []}, {"id": "n394", "label": "Company continues subject to control（公司继续但受控制）", "children": []}, {"id": "n395", "label": "Other creditors may be affected by secured enforcement（其他债权人受担保执行影响）", "children": []}, {"id": "n396", "label": "Can interact with other external administration procedures（可与其他程序交叉）", "children": []}]}, {"id": "n403", "label": "Mortgagee in possession（抵押权人占有）", "children": [{"id": "n398", "label": "Secured creditor itself takes possession and sells（担保债权人自行占有出售）", "children": []}, {"id": "n399", "label": "Less costly and avoids receiver qualification restrictions（成本较低且避开接管人资格限制）", "children": []}, {"id": "n400", "label": "Higher risk of liability if breach occurs（违约时责任风险更高）", "children": []}, {"id": "n401", "label": "Jovanovic v Commonwealth Bank（抵押权人占有案例）", "children": []}, {"id": "n402", "label": "s 420A also applies to controllers（控制人也适用s420A）", "children": []}]}]}, {"id": "n415", "label": "Schemes of arrangement（安排方案）", "children": [{"id": "n410", "label": "Process - Pt 5.1（程序）", "children": [{"id": "n405", "label": "Company prepares scheme proposal and explanatory statement（准备方案与说明书）", "children": []}, {"id": "n406", "label": "Court approval to convene creditors meeting（法院准许召开债权人会议）", "children": []}, {"id": "n407", "label": "Creditors meeting approval（债权人会议批准）", "children": []}, {"id": "n408", "label": "Court approval of scheme（法院批准方案）", "children": []}, {"id": "n409", "label": "Lodge court order with ASIC（向ASIC提交法院命令）", "children": []}]}, {"id": "n414", "label": "Effect（效果）", "children": [{"id": "n411", "label": "Binding on all creditors once approved（批准后约束所有债权人）", "children": []}, {"id": "n412", "label": "Dissenting creditors may still be bound（反对债权人也受约束）", "children": []}, {"id": "n413", "label": "Administrator/independence requirements（方案管理人独立性要求）", "children": []}]}]}, {"id": "n445", "label": "Voluntary administration（自愿管理）", "children": [{"id": "n421", "label": "Background and object（背景与目的）", "children": [{"id": "n416", "label": "Formal alternative to winding up（清算替代机制）", "children": []}, {"id": "n417", "label": "Limited court involvement（较少法院介入）", "children": []}, {"id": "n418", "label": "Time limits and moratorium（时间限制与暂停执行）", "children": []}, {"id": "n419", "label": "s 435 maximises chance of company/business continuing（最大化存续机会）", "children": []}, {"id": "n420", "label": "If continuation impossible, better return than immediate winding up（不能存续时提高回收）", "children": []}]}, {"id": "n429", "label": "Appointment and process（任命与流程）", "children": [{"id": "n422", "label": "Company appoints - s 436A（公司任命）", "children": []}, {"id": "n423", "label": "Liquidator appoints - s 436B（清算人任命）", "children": []}, {"id": "n424", "label": "Secured party appoints - s 436C（担保方任命）", "children": []}, {"id": "n425", "label": "Notice of appointment - s 450A（任命通知）", "children": []}, {"id": "n426", "label": "First creditors meeting - s 436E（第一次债权人会议）", "children": []}, {"id": "n427", "label": "Investigation and report by administrator（管理人调查与报告）", "children": []}, {"id": "n428", "label": "Second creditors meeting chooses outcome（第二次会议决定结果）", "children": []}]}, {"id": "n434", "label": "Administrator（管理人）", "children": [{"id": "n430", "label": "Officer of company and subject to ss 180-183（作为officer负义务）", "children": []}, {"id": "n431", "label": "Agent of company（公司代理人）", "children": []}, {"id": "n432", "label": "Powers under ss 198G and 437A（管理权力）", "children": []}, {"id": "n433", "label": "Duties and personal liabilities apply（有义务和个人责任）", "children": []}]}, {"id": "n440", "label": "Impact and moratorium（影响与暂停执行）", "children": [{"id": "n435", "label": "Directors powers suspended/limited - ss 198G, 440J（董事权力受限）", "children": []}, {"id": "n436", "label": "Proceedings against company restricted - s 440D（诉讼暂停）", "children": []}, {"id": "n437", "label": "Enforcement restrictions - s 440F（执行限制）", "children": []}, {"id": "n438", "label": "Third-party property rights restricted - s 440B（第三方财产权限制）", "children": []}, {"id": "n439", "label": "Only administrator can deal with company property - s 437D（管理人控制财产）", "children": []}]}, {"id": "n444", "label": "DOCA（公司安排契约）", "children": [{"id": "n441", "label": "Pt 5.3A Div 10 and 11（法定框架）", "children": []}, {"id": "n442", "label": "Sets compromise/restructure terms（规定重组/妥协条款）", "children": []}, {"id": "n443", "label": "May vary, terminate or move to winding up（可变更、终止或转入清算）", "children": []}]}]}, {"id": "n461", "label": "Small business restructuring（小企业重组）", "children": [{"id": "n450", "label": "Eligibility（资格）", "children": [{"id": "n446", "label": "Company incorporated under Corporations Act（公司法下成立）", "children": []}, {"id": "n447", "label": "Total liabilities not exceeding $1 million excluding employee entitlements（负债不超过100万澳元，不含员工权益）", "children": []}, {"id": "n448", "label": "No recent prior small business restructuring/simplified liquidation use（近期未用过相关程序）", "children": []}, {"id": "n449", "label": "Employee entitlements and tax lodgement requirements usually relevant（员工权益和税务申报通常相关）", "children": []}]}, {"id": "n454", "label": "Features（特点）", "children": [{"id": "n451", "label": "Debt restructuring plan（债务重组计划）", "children": []}, {"id": "n452", "label": "Moratorium applies（暂停执行）", "children": []}, {"id": "n453", "label": "Company remains in control（公司保留控制权）", "children": []}]}, {"id": "n460", "label": "Process（流程）", "children": [{"id": "n455", "label": "Appoint restructuring practitioner（任命重组从业者）", "children": []}, {"id": "n456", "label": "Continue trading（继续营业）", "children": []}, {"id": "n457", "label": "Develop plan and documents（制定计划文件）", "children": []}, {"id": "n458", "label": "Creditors vote on plan（债权人投票）", "children": []}, {"id": "n459", "label": "Plan applies or process ends（计划生效或程序结束）", "children": []}]}]}, {"id": "n487", "label": "Winding up and liquidation（清算）", "children": [{"id": "n465", "label": "Aims（目的）", "children": [{"id": "n462", "label": "Orderly distribution of assets（有序分配资产）", "children": []}, {"id": "n463", "label": "Hopelessly insolvent companies cease trading（严重无力偿债公司停止经营）", "children": []}, {"id": "n464", "label": "Investigation of company affairs（调查公司事务）", "children": []}]}, {"id": "n470", "label": "Commencement（开始方式）", "children": [{"id": "n466", "label": "Members voluntary winding up by special resolution（成员自愿清算）", "children": []}, {"id": "n467", "label": "Creditors voluntary winding up（债权人自愿清算）", "children": []}, {"id": "n468", "label": "Compulsory winding up for insolvency - ss 459A, 459C（法院强制清算）", "children": []}, {"id": "n469", "label": "ASIC administrative power in limited late-filing situations（ASIC特定行政清算权）", "children": []}]}, {"id": "n475", "label": "Presumptions of insolvency（无力偿债推定）", "children": [{"id": "n471", "label": "Current insolvency for winding up - s 459C（当前无力偿债）", "children": []}, {"id": "n472", "label": "Past insolvency for recovery proceedings - s 588E（过去无力偿债）", "children": []}, {"id": "n473", "label": "Failure to comply with statutory demand（未遵守法定偿债要求）", "children": []}, {"id": "n474", "label": "Execution returned unsatisfied and other indicators（执行未果等）", "children": []}]}, {"id": "n480", "label": "Statutory demand（法定偿债要求）", "children": [{"id": "n476", "label": "Creditor serves demand under s 459E（债权人送达要求）", "children": []}, {"id": "n477", "label": "Company has 21 days to comply - s 459F（21天内履行）", "children": []}, {"id": "n478", "label": "Or apply to set aside - s 459G（或申请撤销）", "children": []}, {"id": "n479", "label": "Non-compliance creates presumption of insolvency（不履行产生无力偿债推定）", "children": []}]}, {"id": "n486", "label": "Liquidator（清算人）", "children": [{"id": "n481", "label": "Collect, realise and distribute company assets（收集变现并分配资产）", "children": []}, {"id": "n482", "label": "Investigate affairs and possible recoveries（调查事务及可追回交易）", "children": []}, {"id": "n483", "label": "Main powers - s 477（主要权力）", "children": []}, {"id": "n484", "label": "Disclaim onerous property - s 568（放弃负担财产）", "children": []}, {"id": "n485", "label": "Apply to court for directions - IPSC ss 90-15, 90-20（申请法院指示）", "children": []}]}]}, {"id": "n502", "label": "Simplified liquidation（简化清算）", "children": [{"id": "n491", "label": "Eligibility（资格）", "children": [{"id": "n488", "label": "Company cannot pay debts in full within 12 months（12个月内无法全额偿债）", "children": []}, {"id": "n489", "label": "Total debts do not exceed $1 million including employee termination amounts（债务不超过100万澳元，含员工终止金额）", "children": []}, {"id": "n490", "label": "Other regulatory eligibility conditions must be met（还需满足其他条件）", "children": []}]}, {"id": "n496", "label": "Features（特点）", "children": [{"id": "n492", "label": "Simplified three-month reporting to creditors（简化三个月债权人报告）", "children": []}, {"id": "n493", "label": "Modified unfair preference recovery from unrelated creditors（调整非关联债权人偏好追回）", "children": []}, {"id": "n494", "label": "Modified ASIC reporting on possible director offences（调整向ASIC报告董事违法）", "children": []}, {"id": "n495", "label": "Modified meeting/proof processes（简化会议和债权证明流程）", "children": []}]}, {"id": "n501", "label": "Process（流程）", "children": [{"id": "n497", "label": "Company unable to pay debts（公司无法偿债）", "children": []}, {"id": "n498", "label": "Company resolves voluntary winding up and appoints registered liquidator（决议自愿清算并任命注册清算人）", "children": []}, {"id": "n499", "label": "Creditors notified（通知债权人）", "children": []}, {"id": "n500", "label": "Liquidation completed and ASIC records updated（完成清算并更新ASIC记录）", "children": []}]}]}]}, {"id": "n523", "label": "Cross-topic exam integration（跨主题考试整合）", "children": [{"id": "n507", "label": "Structure choice to liability（组织选择到责任）", "children": [{"id": "n504", "label": "Sole trader/partnership: personal or unlimited exposure（个体/合伙个人责任高）", "children": []}, {"id": "n505", "label": "Company/trust with corporate trustee: separate entity or limited liability logic（公司/公司受托人降低责任）", "children": []}, {"id": "n506", "label": "Joint venture: contract can limit mutual agency（合营通过合同限制互相代理）", "children": []}]}, {"id": "n511", "label": "Company personality to governance（法人独立到公司治理）", "children": [{"id": "n508", "label": "Salomon protects shareholders from company debts（Salomon保护股东）", "children": []}, {"id": "n509", "label": "Directors/officers still face duties and penalties（董事/officer仍承担义务和罚则）", "children": []}, {"id": "n510", "label": "Members use derivative/oppression/remedy tools when controllers misuse power（控制人滥权时成员用救济）", "children": []}]}, {"id": "n517", "label": "Financial distress timeline（财务困境时间线）", "children": [{"id": "n512", "label": "Directors suspect insolvency: s 588G/safe harbour analysis（董事怀疑无力偿债）", "children": []}, {"id": "n513", "label": "Auditors report material problems and owe care（审计师报告与注意义务）", "children": []}, {"id": "n514", "label": "Secured creditors may enforce via receiver or mortgagee in possession（担保债权人执行）", "children": []}, {"id": "n515", "label": "Company may restructure through VA, scheme or SBR（公司重整）", "children": []}, {"id": "n516", "label": "If rescue fails, winding up/liquidation distributes assets（失败后清算分配）", "children": []}]}, {"id": "n522", "label": "IRAC checklist（IRAC检查清单）", "children": [{"id": "n518", "label": "Issue: identify role and procedure（问题：角色和程序）", "children": []}, {"id": "n519", "label": "Rule: statute + case + legal test（规则：条文+案例+测试）", "children": []}, {"id": "n520", "label": "Application: match facts to each element（适用：事实对应每个要素）", "children": []}, {"id": "n521", "label": "Conclusion: liability, remedy or likely outcome（结论：责任/救济/结果）", "children": []}]}]}]}</script>
+  <script>
+    const rawData = JSON.parse(document.getElementById("mindmap-data").textContent);
+
+    const state = {
+      collapsed: new Set(),
+      selectedId: rawData.id,
+      notesVisible: true,
+      nodeById: new Map(),
+      parentById: new Map(),
+      depthById: new Map(),
+      paletteById: new Map(),
+      total: 0,
+      maxDepth: 0
+    };
+
+    const dom = {
+      tree: document.getElementById("tree"),
+      emptyState: document.getElementById("emptyState"),
+      rootToggleSign: document.getElementById("rootToggleSign"),
+      rootCountLabel: document.getElementById("rootCountLabel"),
+      topicView: document.getElementById("topicView"),
+      expandAll: document.getElementById("expandAll"),
+      collapseAll: document.getElementById("collapseAll"),
+      toggleNotes: document.getElementById("toggleNotes")
+    };
+
+    const branchPalettes = [
+      { accent: "#2563eb", text: "#102a56", soft: "#ecf4ff", soft2: "#ffffff", line: "#bfd0f7", chip: "#dceafe", selected: "#b4463d" },
+      { accent: "#16805d", text: "#113d31", soft: "#edf9f4", soft2: "#ffffff", line: "#b8dece", chip: "#dcf5eb", selected: "#b4463d" },
+      { accent: "#7c3fa0", text: "#3a2250", soft: "#f5effb", soft2: "#ffffff", line: "#dcc4ec", chip: "#f0e2fa", selected: "#b4463d" },
+      { accent: "#b77900", text: "#553a03", soft: "#fff7e6", soft2: "#ffffff", line: "#efd49a", chip: "#fff0c9", selected: "#b4463d" },
+      { accent: "#c2413b", text: "#55201f", soft: "#fff1f0", soft2: "#ffffff", line: "#efc0bd", chip: "#ffe1de", selected: "#8e2d2a" },
+      { accent: "#0f766e", text: "#113f3d", soft: "#e9faf7", soft2: "#ffffff", line: "#b2dfda", chip: "#d8f3ef", selected: "#b4463d" },
+      { accent: "#4f46e5", text: "#242462", soft: "#eef0ff", soft2: "#ffffff", line: "#c8cbff", chip: "#e1e4ff", selected: "#b4463d" },
+      { accent: "#5f7f28", text: "#293c14", soft: "#f3f8ea", soft2: "#ffffff", line: "#cfdfa9", chip: "#e8f3d4", selected: "#b4463d" },
+      { accent: "#be5d16", text: "#542b0e", soft: "#fff2e8", soft2: "#ffffff", line: "#efc6a8", chip: "#ffe3d0", selected: "#9b3b14" },
+      { accent: "#2a7ea0", text: "#143c4c", soft: "#ecf8fc", soft2: "#ffffff", line: "#b7dce8", chip: "#d9f1f8", selected: "#b4463d" },
+      { accent: "#9b4f78", text: "#4b263d", soft: "#fbf0f6", soft2: "#ffffff", line: "#e4bed4", chip: "#f7ddea", selected: "#8f315b" },
+      { accent: "#68723a", text: "#34391d", soft: "#f6f7ee", soft2: "#ffffff", line: "#d6d9b7", chip: "#ecefd7", selected: "#b4463d" }
+    ];
+
+    function walk(node, depth = 0, parent = null, visitor = () => {}) {
+      state.nodeById.set(node.id, node);
+      state.depthById.set(node.id, depth);
+      if (parent) state.parentById.set(node.id, parent.id);
+      state.total += 1;
+      state.maxDepth = Math.max(state.maxDepth, depth);
+      visitor(node, depth, parent);
+      node.children.forEach(child => walk(child, depth + 1, node, visitor));
+    }
+
+    walk(rawData);
+
+    function assignPalette(node, palette) {
+      state.paletteById.set(node.id, palette);
+      node.children.forEach(child => assignPalette(child, palette));
+    }
+
+    function assignBranchPalettes() {
+      state.paletteById.set(rawData.id, branchPalettes[0]);
+      rawData.children.forEach((child, index) => {
+        assignPalette(child, branchPalettes[index % branchPalettes.length]);
+      });
+    }
+
+    assignBranchPalettes();
+
+    function applyPalette(element, node) {
+      const palette = state.paletteById.get(node.id) || branchPalettes[0];
+      element.style.setProperty("--accent", palette.accent);
+      element.style.setProperty("--accent-text", palette.text);
+      element.style.setProperty("--accent-soft", palette.soft);
+      element.style.setProperty("--accent-soft-2", palette.soft2);
+      element.style.setProperty("--accent-line", palette.line);
+      element.style.setProperty("--accent-chip", palette.chip);
+      element.style.setProperty("--selected-accent", palette.selected);
+    }
+
+    function descendants(node) {
+      return node.children.reduce((total, child) => total + 1 + descendants(child), 0);
+    }
+
+    function topicOneId() {
+      const topic = rawData.children.find(node => /^Topic \d+/.test(node.label));
+      return topic ? topic.id : null;
+    }
+
+    function isTopic(node) {
+      return /^Topic \d+/.test(node.label) || node.label.startsWith("Exam Integration");
+    }
+
+    function compactLabel(label) {
+      return label.replace(/\s+[—-]\s+/g, " - ");
+    }
+
+    function collapseBranch(id, includeSelf = true) {
+      const node = state.nodeById.get(id);
+      if (!node) return;
+      if (includeSelf && node.children.length) state.collapsed.add(id);
+      node.children.forEach(child => collapseBranch(child.id, true));
+    }
+
+    function expandAncestors(id) {
+      let current = id;
+      while (state.parentById.has(current)) {
+        current = state.parentById.get(current);
+        state.collapsed.delete(current);
+      }
+    }
+
+    function setInitialState() {
+      state.collapsed.clear();
+      for (const [id, node] of state.nodeById) {
+        if (id !== rawData.id && node.children.length) state.collapsed.add(id);
+      }
+      state.notesVisible = true;
+      dom.toggleNotes.textContent = "Notes On";
+      dom.toggleNotes.setAttribute("aria-pressed", "true");
+      state.selectedId = rawData.id;
+    }
+
+    function showTopicOverview() {
+      state.collapsed.clear();
+      for (const [id, node] of state.nodeById) {
+        if (id !== rawData.id && node.children.length) state.collapsed.add(id);
+      }
+      state.selectedId = rawData.id;
+      render();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function expandAllNodes() {
+      state.collapsed.clear();
+      render();
+    }
+
+    function collapseAllNodes() {
+      showTopicOverview();
+    }
+
+    function toggleNode(id) {
+      const node = state.nodeById.get(id);
+      if (!node) return;
+      state.selectedId = id;
+      if (node.children.length) {
+        if (state.collapsed.has(id)) {
+          expandAncestors(id);
+          state.collapsed.delete(id);
+        } else {
+          state.collapsed.add(id);
+        }
+      }
+      render();
+    }
+
+    function createEl(tag, className, text = "") {
+      const element = document.createElement(tag);
+      if (className) element.className = className;
+      if (text) element.textContent = text;
+      return element;
+    }
+
+    function nodeToggleSign(node) {
+      if (!node.children.length) return "";
+      return state.collapsed.has(node.id) ? "+" : "-";
+    }
+
+    function nodeCountText(node) {
+      if (!node.children.length) return "";
+      return String(node.children.length);
+    }
+
+    const preferredKeyPhrases = [
+      "business structure",
+      "separate legal entity",
+      "limited liability",
+      "unlimited liability",
+      "partnership",
+      "joint venture",
+      "trust",
+      "company",
+      "Corporations Act",
+      "ASIC",
+      "director",
+      "officer",
+      "fiduciary",
+      "good faith",
+      "proper purpose",
+      "conflict",
+      "care and diligence",
+      "business judgment rule",
+      "insolvent trading",
+      "safe harbour",
+      "member remedies",
+      "oppression",
+      "derivative action",
+      "auditor",
+      "reasonable care and skill",
+      "external administration",
+      "receivership",
+      "voluntary administration",
+      "winding up",
+      "liquidation"
+    ];
+
+    const highlightStopWords = new Set([
+      "a", "an", "and", "are", "as", "be", "by", "can", "for", "from", "how", "in", "into",
+      "is", "of", "on", "or", "so", "that", "the", "through", "to", "under", "using", "with",
+      "without", "explains", "describes", "shows", "supports", "represents", "connects",
+      "uses", "views", "highlights", "practical", "concept", "analysing"
+    ]);
+
+    function cleanConceptText(text) {
+      return text
+        .replace(/（[^）]*）/g, " ")
+        .replace(/\([^)]*\)/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function escapeRegExp(text) {
+      return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    }
+
+    function hasPhrase(text, phrase) {
+      return new RegExp(`(^|[^A-Za-z0-9])${escapeRegExp(phrase)}([^A-Za-z0-9]|$)`, "i").test(text);
+    }
+
+    function uniquePhrases(phrases) {
+      const seen = new Set();
+      return phrases.filter(phrase => {
+        const key = phrase.toLowerCase();
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+    }
+
+    function normalisePhrase(text) {
+      return cleanConceptText(text)
+        .toLowerCase()
+        .replace(/[^\p{L}\p{N}\s]/gu, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function meaningfulWords(text) {
+      return normalisePhrase(text)
+        .split(" ")
+        .filter(word => word && !highlightStopWords.has(word));
+    }
+
+    function isTitleRepeat(phrase, node) {
+      const phraseWords = meaningfulWords(phrase);
+      const titleWords = meaningfulWords(node.label);
+      if (!phraseWords.length || !titleWords.length) return false;
+
+      const phraseNormal = phraseWords.join(" ");
+      const titleNormal = titleWords.join(" ");
+      if (phraseNormal === titleNormal) return true;
+      if (phraseWords.every(word => titleWords.includes(word))) return true;
+
+      const sharedCount = phraseWords.filter(word => titleWords.includes(word)).length;
+      const coversMostOfTitle = titleWords.length >= 3
+        && phraseWords.length >= 3
+        && sharedCount / titleWords.length >= 0.72;
+      return coversMostOfTitle;
+    }
+
+    function fallbackPhrases(text, note) {
+      const groups = [];
+      let current = [];
+      cleanConceptText(text)
+        .replace(/[^\p{L}\p{N}\s-]/gu, " ")
+        .split(/\s+/)
+        .filter(Boolean)
+        .forEach(word => {
+          const normal = word.toLowerCase();
+          if (highlightStopWords.has(normal)) {
+            if (current.length) groups.push(current.join(" "));
+            current = [];
+            return;
+          }
+          current.push(word);
+          if (current.length === 3) {
+            groups.push(current.join(" "));
+            current = [];
+          }
+        });
+      if (current.length) groups.push(current.join(" "));
+
+      return groups
+        .map(phrase => phrase.trim())
+        .filter(phrase => phrase.length >= 4 && phrase.length <= 42 && hasPhrase(note, phrase));
+    }
+
+    function highlightPhrases(node) {
+      const note = node.note || "";
+      const conceptMatch = note.match(/^Explains\s+(.+?)\s+as a practical concept/i);
+      const conceptText = cleanConceptText(conceptMatch ? conceptMatch[1] : node.label);
+      const candidates = [];
+
+      preferredKeyPhrases.forEach(phrase => {
+        if (hasPhrase(conceptText, phrase) && hasPhrase(note, phrase)) candidates.push(phrase);
+      });
+
+      conceptText.split(/\s*(?:→|=|\/|;|,)\s*/).forEach(part => {
+        const phrase = part.trim();
+        if (phrase.length >= 4 && phrase.length <= 42 && hasPhrase(note, phrase)) candidates.push(phrase);
+      });
+
+      let filtered = uniquePhrases(candidates).filter(phrase => !isTitleRepeat(phrase, node));
+
+      if (filtered.length < 2) {
+        preferredKeyPhrases.forEach(phrase => {
+          if (hasPhrase(note, phrase) && !isTitleRepeat(phrase, node)) filtered.push(phrase);
+        });
+      }
+      if (filtered.length < 2) fallbackPhrases(conceptText, note).forEach(phrase => filtered.push(phrase));
+      if (filtered.length < 2) fallbackPhrases(note, note).forEach(phrase => filtered.push(phrase));
+
+      return uniquePhrases(filtered)
+        .filter(phrase => !isTitleRepeat(phrase, node))
+        .slice(0, 3);
+    }
+
+    function appendHighlightedText(container, text, phrases) {
+      const matches = [];
+      phrases.forEach(phrase => {
+        const pattern = new RegExp(`(^|[^A-Za-z0-9])(${escapeRegExp(phrase)})(?=[^A-Za-z0-9]|$)`, "i");
+        const match = text.match(pattern);
+        if (!match) return;
+        const start = (match.index || 0) + match[1].length;
+        matches.push({ start, end: start + match[2].length });
+      });
+
+      matches.sort((a, b) => a.start - b.start || b.end - a.end);
+      const nonOverlapping = [];
+      matches.forEach(match => {
+        if (!nonOverlapping.some(existing => match.start < existing.end && match.end > existing.start)) {
+          nonOverlapping.push(match);
+        }
+      });
+
+      let cursor = 0;
+      nonOverlapping.forEach(match => {
+        if (match.start > cursor) container.append(document.createTextNode(text.slice(cursor, match.start)));
+        const key = createEl("mark", "note-key", text.slice(match.start, match.end));
+        container.append(key);
+        cursor = match.end;
+      });
+      if (cursor < text.length) container.append(document.createTextNode(text.slice(cursor)));
+    }
+
+    function renderNote(node) {
+      const note = createEl("span", "node-note");
+      appendHighlightedText(note, node.note, highlightPhrases(node));
+      return note;
+    }
+
+    function renderNode(node) {
+      const depth = state.depthById.get(node.id) || 0;
+      const item = createEl("li", `tree-item depth-${depth}${state.selectedId === node.id ? " selected" : ""}`);
+      item.dataset.nodeId = node.id;
+      applyPalette(item, node);
+
+      const card = createEl("button", [
+        "node-card",
+        node.children.length ? "has-children" : "leaf-card",
+        node.note ? "has-note" : "",
+        isTopic(node) ? "topic-card" : ""
+      ].filter(Boolean).join(" "));
+      card.type = "button";
+      if (node.children.length) card.setAttribute("aria-expanded", String(!state.collapsed.has(node.id)));
+      card.setAttribute("aria-label", node.children.length
+        ? `${state.collapsed.has(node.id) ? "Expand" : "Collapse"} ${node.label}, ${node.children.length} branches`
+        : node.label);
+      card.addEventListener("click", () => toggleNode(node.id));
+
+      if (node.children.length) card.append(createEl("span", "toggle-chip", nodeToggleSign(node)));
+
+      const content = createEl("span", "node-content");
+      content.append(createEl("span", "node-title", compactLabel(node.label)));
+
+      if (node.children.length) {
+        content.append(createEl("span", "node-meta", `${node.children.length} branches · ${descendants(node)} concepts`));
+      }
+
+      if (node.note) {
+        content.append(renderNote(node));
+      }
+
+      card.append(content);
+      if (node.children.length) card.append(createEl("span", "count-chip", nodeCountText(node)));
+      item.append(card);
+
+      if (node.children.length && !state.collapsed.has(node.id)) {
+        const children = createEl("ul", "children");
+        node.children.forEach(child => children.append(renderNode(child)));
+        item.append(children);
+      }
+
+      return item;
+    }
+
+    function updateRootToggle() {
+      dom.rootToggleSign.textContent = nodeToggleSign(rawData);
+      dom.rootCountLabel.textContent = nodeCountText(rawData);
+    }
+
+    function render() {
+      dom.tree.classList.toggle("compact-notes", !state.notesVisible);
+      dom.tree.innerHTML = "";
+      if (!rawData.children.length) {
+        dom.emptyState.classList.add("visible");
+        return;
+      }
+      dom.emptyState.classList.remove("visible");
+      rawData.children.forEach(child => dom.tree.append(renderNode(child)));
+      updateRootToggle();
+    }
+
+    function bindControls() {
+      document.getElementById("rootHeader").addEventListener("click", event => {
+        if (event.target.closest(".tool-button")) return;
+        toggleNode(rawData.id);
+      });
+      dom.topicView.addEventListener("click", showTopicOverview);
+      dom.expandAll.addEventListener("click", expandAllNodes);
+      dom.collapseAll.addEventListener("click", collapseAllNodes);
+      dom.toggleNotes.addEventListener("click", () => {
+        state.notesVisible = !state.notesVisible;
+        dom.toggleNotes.textContent = state.notesVisible ? "Notes On" : "Notes Off";
+        dom.toggleNotes.setAttribute("aria-pressed", String(state.notesVisible));
+        render();
+      });
+    }
+
+    function init() {
+      bindControls();
+      setInitialState();
+      render();
+    }
+
+    init();
+  </script>
+</body>
+</html>
